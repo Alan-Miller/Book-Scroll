@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app="bookApp">
+  <head>
+    <title>BOOK SCROLL</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
+    <link rel="stylesheet" href="./styles/reset.css" media="screen" title="no title">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
+    <link rel="stylesheet" href="./styles/carousel.css" media="screen" title="no title">
+    <link rel="stylesheet" href="./styles/styles.css" media="screen" title="no title">
+    <link rel="stylesheet" href="./styles/fonts.css" media="screen" title="no title">
+    <link rel="stylesheet" href="">
+    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+  </head>
+  <body ng-controller="dictController">
+
+  <header class="splash-header">
+    <section class="carousel-container">
+      <img src="./img/unsplash/bw/beard.jpg"/>
+      <img src="./img/unsplash/bw/lean.jpg"/>
+      <img src="./img/unsplash/bw/leather.jpg"/>
+      <img src="./img/unsplash/bw/lotr.jpg"/>
+      <img src="./img/unsplash/bw/sale.jpg"/>
+      <img src="./img/unsplash/bw/tiles.jpg"/>
+    </section>
+  </header>
+
+
+
+  <section class="main-section">
+    <div class="side-flex-wrapper">
+      <div id="nav-div" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
+        NAV DIV
+      </div>
+    </div>
+
+    <span class="title-letters">
+      <span class="char1">B</span>
+      <span class="char2">O</span>
+      <span class="char3">O</span>
+      <span class="char4">K</span>
+      <span class="char5">&nbsp&nbsp&nbsp&nbsp</span>
+      <span class="char6">S</span>
+      <span class="char7">C</span>
+      <span class="char8">R</span>
+      <span class="char9">O</span>
+      <span class="char10">L</span>
+      <span class="char11">L</span>
+    </span>
+
+    <div class="reader-flex-wrapper">
+      <div id="reader-div">
+        <p>READER DIV</p>
+        <form runat="server">
+          <button type="button" class="btn btn-danger">Upload book<input type="file" id="the-book" class="transparent"/></button>
+          <p id="book-goes-here"></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="side-flex-wrapper">
+      <div id="dict-div" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
+        DICTIONARY DIV
+        <p>Type a word. See what it means.</p>
+          <form ng-submit="getWord(input)">
+            <input type="text" ng-model="input">
+            <div class="bold line-spaces">{{input}}</div>
+          </form>
+          <p ng-repeat="def in theWord">
+            <span class="em line-spaces"> {{def.partOfSpeech}} </span> {{def.text}}
+          </p>
+      </div>
+    </div>
+</section>
+
+
+
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+    <!-- <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script> -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.js"></script> -->
+    <script type="text/javascript" src="./js/app.js"></script>
+    <script type="text/javascript" src="./js/scripts.js"></script>
+    <script type="text/javascript" src="./js/service.js"></script>
+    <script type="text/javascript" src="./js/carousel.js"></script>
+    <script type="text/javascript" src="./reader/readerController.js"></script>
+    <script type="text/javascript" src="./loader/loaderController.js"></script>
+    <script type="text/javascript" src="./dict/dictController.js"></script>
+    <script type="text/javascript" src="./chapters/chaptersController.js"></script>
+    <script type="text/javascript" src="./bmarks/bmarksController.js"></script>
+  </body>
+</html>

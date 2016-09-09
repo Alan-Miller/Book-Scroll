@@ -1,0 +1,66 @@
+.em {
+  font-style: italic;
+}
+.bold {
+  font-weight: bold;
+  font-size: 2.1em;
+}
+
+/*.char1, .char3, .char6, .char9, .char11 {
+    -webkit-transform: scale(1) skewY(-15deg);
+    -o-transform: scale(1) skewY(-15deg);
+    -moz-transform: scale(1) skewY(-15deg);
+    -ms-transform: scale(1) skewY(-15deg);
+    transform: scale(1) skewY(-15deg);
+    background: #e24b3b url(http://pcdn.paravel.netdna-cdn.com/wp-content/uploads/2011/05/dots.png) left top;
+    background-size: 175%;
+}*/
+
+/*.char2, .char5, .char8, .char10, .char12 {
+    -webkit-transform: scale(1) skewY(15deg);
+    -o-transform: scale(1) skewY(15deg);
+    -moz-transform: scale(1) skewY(15deg);
+    -ms-transform: scale(1) skewY(15deg);
+    transform: scale(1) skewY(15deg);
+    background: #a93629 url(http://pcdn.paravel.netdna-cdn.com/wp-content/uploads/2011/05/dots.png) center top;
+    background-size: 175%;
+}*/
+
+.title-letters {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: -120px;
+    color: rgb(236, 177, 173);
+}
+
+
+.char1, .char3, .char7, .char9, .char11 {
+  /*transform: skewX();*/
+  background-color: rgb(217, 56, 46);
+  font-size: 4em;
+  width: 65px;
+	height: 90px;
+  display: inline-block;
+	-webkit-transform: skewY(20deg);
+	   -moz-transform: skewY(20deg);
+	     -o-transform: skewY(20deg);
+  text-align: center;
+}
+
+
+.char2, .char4, .char6, .char8, .char10, .char12 {
+  /*transform: skewX();*/
+  background-color: rgb(190, 25, 15);
+  background-position: top;
+  font-size: 4em;
+  width: 65px;
+	height: 90px;
+  display: inline-block;
+	-webkit-transform: skewY(-20deg);
+	   -moz-transform: skewY(-20deg);
+	     -o-transform: skewY(-20deg);
+  text-align: center;
+  position: relative;
+  margin: -4px;
+}
