@@ -1,4 +1,4 @@
-angular.module('bookApp').controller('loaderController', function($scope) {
+angular.module('bookApp').controller('loaderController', function($scope, bookService) {
 
 
 

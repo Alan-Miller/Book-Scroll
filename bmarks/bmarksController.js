@@ -1,4 +1,4 @@
-angular.module('bookApp').controller('bmarksController', function($scope) {
+angular.module('bookApp').controller('bmarksController', function($scope, bookService) {
 
 
 
