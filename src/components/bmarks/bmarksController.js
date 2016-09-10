@@ -1,4 +1,4 @@
-angular.module('bookApp').controller('bmarksController', function($scope, bookService) {
+angular.module('bookApp').controller('bmarksController', function($scope, service) {
 
   $scope.bookmarks = [
     {'id': 'here'},

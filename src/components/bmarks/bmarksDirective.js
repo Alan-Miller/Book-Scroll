@@ -5,7 +5,7 @@ angular.module('bookApp')
     scope: {
       test: '='
     },
-    template: '<ng-include src="./src/components/bmarks/bmarks.html" />', // WTH
+    template: '<ng-include src="src/components/bmarks/bmarks.html" />', // WTH
     controller: function($scope, service) {
       // $scope.look = 'okay then';
       // alert('Directive might not be working');

@@ -1,4 +1,4 @@
-angular.module('bookApp').controller('loaderController', function($scope, bookService) {
+angular.module('bookApp').controller('loaderController', function($scope, service) {
 
   // function uploadBook(htmlFile) {
   //     if (htmlFile.files && htmlFile.files[0]) {
