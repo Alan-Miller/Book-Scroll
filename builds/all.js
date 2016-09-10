@@ -58,6 +58,11 @@ $(document).ready(function () {
   });
 });
 
+angular.module('bookApp').controller('mainController', function ($scope, bookService) {
+
+  $scope.bookBump = function (book) {};
+});
+
 // <div onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';"></div>
 
 
@@ -66,6 +71,10 @@ $(document).ready(function () {
 //         var reader = new FileReader();
 //         reader.onload = function(e) {
 //           $('#book-appears-here').html(e.target.result);
+//           // console.log(e.target.result);
+//           // var bookData = e.target.result;
+//           localStorage.setItem("bookData", e.target.result);
+//           console.log(localStorage.getItem('bookData'));
 //         };
 //         reader.readAsText(htmlFile.files[0]);
 //         return htmlFile.files[0];
@@ -76,6 +85,8 @@ $(document).ready(function () {
 // $("#the-book").change(function() {
 //     uploadBook(this);
 // });
+//
+// function reloadBook = localStorage.getItem('bookData');
 
 
 // function uploadBook(htmlFile) {
@@ -101,7 +112,7 @@ $(document).ready(function () {
 //         reader.onload = function(e) {
 //           $('#book-appears-here').html(e.target.result);
 //           var contents = e.target.result;
-//           console.log(contents);
+//           (contents);
 //           console.log(typeof contents);
 //           // var bodyTag = /<body*>/;
 //           var lines = contents.split('\n');
@@ -137,7 +148,54 @@ angular.module('bookApp').service('bookService', function ($http) {
   };
 });
 
-angular.module('bookApp').controller('bmarksController', function ($scope, bookService) {});
+angular.module('bookApp').controller('chaptersController', function ($scope, bookService) {});
+
+angular.module('bookApp').controller('bmarksController', function ($scope, bookService) {
+
+  $scope.bookmarks = [{ 'id': 'here' }, { 'id': 'there' }];
+
+  // $scope.look = 'okay then';
+  $scope.test = 'Why don\'t you work';
+});
+
+angular.module('bookApp').directive('bmarker', function () {
+  return {
+    restrict: 'AE',
+    scope: {
+      test: '='
+    },
+    template: '<ng-include src="./src/components/bmarks/bmarks.html" />', // WTH
+    controller: function controller($scope, service) {
+      // $scope.look = 'okay then';
+      // alert('Directive might not be working');
+    }
+  };
+});
+
+// angular.module('bookApp')
+// .directive('bmarker', function() {
+//   return {
+//     restrict: 'AE',
+//     scope: {
+//       test: '='
+//     },
+//     link: function(scope, element, attrs) {
+//       element.on('click', function(event) {
+//         // scope.foo({msg: 'Keep on fighting!'}); // Angular takes key value pairs and retrieves value
+//         // var newColor = getColor();
+//         var targetElement = element.find('section');
+//         // console.log(targetElement);
+//         targetElement.css('background-color', newColor);
+//         scope.callback();
+//       });
+//     },
+//     template: '<ng-include src="./src/components/bmarks/bmarks.html" />', // WTH
+//     // templateUrl: '/src/components/bmarks/bmarks.html',
+//     controller: function($scope, service) {
+//     }
+//   };
+//
+// });
 
 angular.module('bookApp').controller('dictController', function ($scope, bookService) {
 
@@ -148,21 +206,42 @@ angular.module('bookApp').controller('dictController', function ($scope, bookSer
   };
   // $scope.getWord();
 
-});
 
-angular.module('bookApp').controller('readerController', function ($scope, bookService) {
-
-  // $scope.file = htmlFile.files[0];
-
+  $scope.hello = 'world';
 });
 
 angular.module('bookApp').controller('loaderController', function ($scope, bookService) {
+
+  // function uploadBook(htmlFile) {
+  //     if (htmlFile.files && htmlFile.files[0]) {
+  //         var reader = new FileReader();
+  //         reader.onload = function(e) {
+  //           $('#book-appears-here').html(e.target.result);
+  //         };
+  //         reader.readAsText(htmlFile.files[0]);
+  //         return htmlFile.files[0];
+  //     }
+  // }
+  //
+  // $("#the-book").change(function() {
+  //     uploadBook(this);
+  //     $state.go('bmarks');
+  // });
+
+
+});
+
+angular.module('bookApp').controller('readerController', function ($scope, bookService) {
 
   function uploadBook(htmlFile) {
     if (htmlFile.files && htmlFile.files[0]) {
       var reader = new FileReader();
       reader.onload = function (e) {
         $('#book-appears-here').html(e.target.result);
+        // console.log(e.target.result);
+        // var bookData = e.target.result;
+        localStorage.setItem("bookData", e.target.result);
+        // $scope.getIt = localStorage.getItem('bookData');
       };
       reader.readAsText(htmlFile.files[0]);
       return htmlFile.files[0];
@@ -172,6 +251,29 @@ angular.module('bookApp').controller('loaderController', function ($scope, bookS
   $("#the-book").change(function () {
     uploadBook(this);
   });
-});
 
-angular.module('bookApp').controller('chaptersController', function ($scope, bookService) {});
+  // function reloadBook() {
+  //   var reader = new FileReader();
+  //   localStorage.getItem('bookData');
+  //   reader.readAsText('bookData');
+  // }
+  // $scope.reloadBook = reloadBook;
+
+
+  // function uploadBook(htmlFile) {
+  //     if (htmlFile.files && htmlFile.files[0]) {
+  //         var reader = new FileReader();
+  //         reader.onload = function(e) {
+  //           $('#book-appears-here').html(e.target.result);
+  //         };
+  //         reader.readAsText(htmlFile.files[0]);
+  //         return htmlFile.files[0];
+  //     }
+  // }
+  //
+  // $("#the-book").change(function() {
+  //     uploadBook(this);
+  //     $state.go('bmarks');
+  // });
+
+});

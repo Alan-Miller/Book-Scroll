@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
     <link rel='shortcut icon' href='./src/img/icons/book(2).png' type='image/x-icon'/ >
-    <link rel="stylesheet" href="./src/styles/reset.css" media="screen" title="no title">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
+    <link rel="stylesheet" href="./src/styles/reset.css" media="screen" title="no title">
     <link rel="stylesheet" href="./src/styles/carousel.css" media="screen" title="no title">
     <link rel="stylesheet" href="./src/styles/styles.css" media="screen" title="no title">
     <link rel="stylesheet" href="./src/styles/fonts.css" media="screen" title="no title">
     <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
   </head>
-  <body ng-controller="dictController">
+  <body>
 
   <header class="splash-header">
     <section class="carousel-container">
@@ -34,27 +34,37 @@
 
   <section class="main-section">
 
-    <span class="title-letters">
-      <span class="char1">B</span>
-      <span class="char2">O</span>
-      <span class="char3">O</span>
-      <span class="char4">K</span>
+    <span class="title-letters" ng-controller="mainController">
+      <span class="book-letters" ng-mouseover="bookBump()">
+        <span class="char1" ng-mouseover="bookBump()">B</span>
+        <span class="char2">O</span>
+      </span>
+      <span class="book-letters" ng-mouseover="bookBump()">
+        <span class="char3">O</span>
+        <span class="char4">K</span>
+      </span>
       <span class="char5">
         &nbsp&nbsp&nbsp&nbsp
       </span>
-      <span class="char6">S</span>
-      <span class="char7">C</span>
-      <span class="char8">R</span>
-      <span class="char9">O</span>
-      <span class="char10">L</span>
-      <span class="char11">L</span>
+      <span class="book-letters" ng-mouseover="bookBump()">
+        <span class="char6">S</span>
+        <span class="char7">C</span>
+      </span>
+      <span class="book-letters" ng-mouseover="bookBump()">
+        <span class="char8">R</span>
+        <span class="char9">O</span>
+      </span>
+      <span class="book-letters" ng-mouseover="bookBump()">
+        <span class="char10">L</span>
+        <span class="char11">L</span>
+      </span>
     </span>
 
 
     <div class="side-flex-wrapper">
       <div class="nav-button-wrapper">
-        <span class="nav-button" ui-sref="chapters">Chap</span>
-        <span class="nav-button" ui-sref="bmarks">Bmarks</span>
+        <span class="nav-button" ui-sref="chapters">CH</span>
+        <span class="nav-button" ui-sref="bmarks">BMS</span>
       </div>
       <div id="nav-div" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
         <!-- NAV DIV -->
@@ -65,37 +75,37 @@
     <div class="reader-flex-wrapper">
       <div class="reader-button-wrapper">
         <span class="reader-button" ui-sref="loader">LOAD</span>
-        <span class="reader-button" ui-sref="reader">READER</span>
+        <span class="reader-button" ui-sref="reader">READ</span>
       </div>
       <div id="reader-div">
         <!-- <p>READER DIV</p> -->
         <div ui-view="textDiv"></div>
-        <form runat="server">
+        <!-- <form runat="server">
           <button type="button" class="btn btn-danger">Upload book<input type="file" id="the-book" class="transparent"/></button>
           <p id="book-appears-here"></p>
-        </form>
+        </form> -->
       </div>
     </div>
 
     <div class="side-flex-wrapper">
       <div class="dict-button-wrapper">
-        <span class="dict-button" ui-sref="chapters">DICT</span>
-        <span class="dict-button" ui-sref="bmarks">DICT 2</span>
+        <span class="dict-button" ui-sref="dict">WORDS</span>
+        <!-- <span class="dict-button" ui-sref="dict">DICT 2</span> -->
       </div>
       <div id="dict-div" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
-        DICTIONARY DIV
+        <!-- DICTIONARY DIV -->
         <div ui-view="wordDiv"></div>
-        <p>Type a word. See what it means.</p>
+        <!-- <p>Don't know a word? Look it up!</p>
           <form ng-submit="getWord(input)">
             <input type="text" ng-model="input">
             <div class="bold line-spaces">{{input}}</div>
           </form>
           <p ng-repeat="def in theWord">
             <span class="em line-spaces"> {{def.partOfSpeech}} </span> {{def.text}}
-          </p>
+          </p> -->
       </div>
     </div>
-</section>
+  </section>
 
 
 
@@ -106,15 +116,17 @@
     <!-- <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script> -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.js"></script> -->
-    <script type="text/javascript" src="./builds/all.js"></script>
-    <!-- <script type="text/javascript" src="./js/app.js"></script>
-    <script type="text/javascript" src="./js/scripts.js"></script>
-    <script type="text/javascript" src="./js/service.js"></script>
-    <script type="text/javascript" src="./js/carousel.js"></script>
+    <!-- <script type="text/javascript" src="./builds/all.js"></script> -->
+    <script type="text/javascript" src="./src/js/app.js"></script>
+    <script type="text/javascript" src="./src/js/carousel.js"></script>
+    <script type="text/javascript" src="./src/js/service.js"></script>
+    <script type="text/javascript" src="./src/js/scripts.js"></script>
+    <script type="text/javascript" src="./src/js/mainController.js"></script>
     <script type="text/javascript" src="./src/components/reader/readerController.js"></script>
     <script type="text/javascript" src="./src/components/loader/loaderController.js"></script>
     <script type="text/javascript" src="./src/components/dict/dictController.js"></script>
     <script type="text/javascript" src="./src/components/chapters/chaptersController.js"></script>
-    <script type="text/javascript" src="./src/components/bmarks/bmarksController.js"></script> -->
+    <script type="text/javascript" src="./src/components/bmarks/bmarksController.js"></script>
+    <script type="text/javascript" src="./src/components/bmarks/bmarksDirective.js"></script>
   </body>
 </html>

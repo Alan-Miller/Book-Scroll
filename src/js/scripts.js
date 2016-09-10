@@ -1,21 +1,33 @@
 // <div onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';"></div>
 
 
-function uploadBook(htmlFile) {
-    if (htmlFile.files && htmlFile.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          $('#book-appears-here').html(e.target.result);
-        };
-        reader.readAsText(htmlFile.files[0]);
-        return htmlFile.files[0];
-    }
-}
+// function uploadBook(htmlFile) {
+//     if (htmlFile.files && htmlFile.files[0]) {
+//         var reader = new FileReader();
+//         reader.onload = function(e) {
+//           $('#book-appears-here').html(e.target.result);
+//           // console.log(e.target.result);
+//           // var bookData = e.target.result;
+//           localStorage.setItem("bookData", e.target.result);
+//           console.log(localStorage.getItem('bookData'));
+//         };
+//         reader.readAsText(htmlFile.files[0]);
+//         return htmlFile.files[0];
+//     }
+// }
+//
+//
+// $("#the-book").change(function() {
+//     uploadBook(this);
+// });
+//
+// function reloadBook = localStorage.getItem('bookData');
 
 
-$("#the-book").change(function() {
-    uploadBook(this);
-});
+
+
+
+
 
 
 // function uploadBook(htmlFile) {
@@ -43,7 +55,7 @@ $("#the-book").change(function() {
 //         reader.onload = function(e) {
 //           $('#book-appears-here').html(e.target.result);
 //           var contents = e.target.result;
-//           console.log(contents);
+//           (contents);
 //           console.log(typeof contents);
 //           // var bodyTag = /<body*>/;
 //           var lines = contents.split('\n');

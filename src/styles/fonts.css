@@ -35,32 +35,74 @@
 }
 
 
-.char1, .char3, .char7, .char9, .char11 {
+.char1, .char2, .char3, .char4, .char5, .char6, .char7, .char8, .char9, .char10, .char11 {
   /*transform: skewX();*/
-  background-color: rgb(217, 56, 46);
   font-size: 4em;
   width: 65px;
 	height: 90px;
   display: inline-block;
-	-webkit-transform: skewY(20deg);
-	   -moz-transform: skewY(20deg);
-	     -o-transform: skewY(20deg);
   text-align: center;
+  border-radius: 3px;
+  box-shadow: 7px 7px 10px 0px rgba(36, 36, 36, .8);
 }
-
-
-.char2, .char4, .char6, .char8, .char10, .char12 {
-  /*transform: skewX();*/
-  background-color: rgb(190, 25, 15);
-  background-position: top;
-  font-size: 4em;
-  width: 65px;
-	height: 90px;
-  display: inline-block;
+.char5 {
+  box-shadow: 0px 0px 0px 0px white;
+}
+.char1, .char3, .char7, .char9, .char11 {
+  -webkit-transform: skewY(20deg);
+     -moz-transform: skewY(20deg);
+       -o-transform: skewY(20deg);
+}
+.char2, .char4, .char6, .char8, .char10 {
 	-webkit-transform: skewY(-20deg);
 	   -moz-transform: skewY(-20deg);
 	     -o-transform: skewY(-20deg);
-  text-align: center;
-  position: relative;
-  margin: -4.4px;
+  margin: -5px;
+}
+.char1, .char3, .char6, .char8, .char10 {
+  border-right: thick solid rgb(223, 72, 64);
+  background-color: rgb(217, 56, 46);
+}
+.char2, .char4, .char7, .char9, .char11 {
+  border-left: thick solid rgb(159, 24, 17);
+  background-color: rgb(184, 18, 8);
+}
+.char2:after, .char4:after, .char7:after, .char9:after, .char11:after {
+  content: '';
+  border-left: 1px solid rgb(159, 24, 17);
+  border-right: 2px solid rgb(133, 19, 13);
+  /*background-color: rgb(159, 24, 17);*/
+  height: 84px;
+  width: 9px;
+  /*background-color: rgb(184, 18, 8);*/
+  position: absolute;
+  left: -10px;
+  top: 3px;
+}
+.char1:before, .char2:before, .char3:before, .char4:before {
+  content: '';
+  background-color: rgb(254, 219, 217);
+  position: absolute;
+  top: -4px;
+  width: 65px;
+  height: 4px;
+  z-index: 0;
+}
+.char2:before, .char4:before {
+  left: -5px;
+  width: 59px;
+}
+.char6:before, .char7:before, .char8:before, .char9:before, .char10:before, .char11:before {
+  content: '';
+  background-color: rgb(254, 219, 217);
+  position: absolute;
+  bottom: -4px;
+  left: 7px;
+  width: 65px;
+  height: 4px;
+  z-index: 0;
+}
+.char7:before, .char9:before, .char11:before {
+  left: -5px;
+  width: 59px;
 }

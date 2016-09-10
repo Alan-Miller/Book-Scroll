@@ -1,1 +1,13 @@
-<a>DICTIONARY HERE</a>
+<!-- <a>DICTIONARY HERE</a> -->
+<!-- <p>{{hello}}</p> -->
+
+
+
+<p>Look up words!</p>
+<form ng-submit="getWord(input)">
+  <input type="text" ng-model="input">
+  <div class="bold line-spaces">{{input}}</div>
+</form>
+<p ng-repeat="def in theWord">
+  <span class="em line-spaces"> {{def.partOfSpeech}} </span> {{def.text}}
+</p>
