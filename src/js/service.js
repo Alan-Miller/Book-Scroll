@@ -24,13 +24,14 @@ angular.module('bookApp').service('service', function($http, $state) {
   - inputElement.files is the array with the uploaded file
   - inputElement.files[0] contains the desired file data
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  var theFile = {title: 'About Steve', text: 'Steve sucks.'};
+  var theFile = {title: '', text: ''};
 
 
   this.uploadBook = function(inputElement) {
       theFile = inputElement.files[0];
       if (inputElement.files && theFile) {
           var reader = new FileReader();
+          $state.go('reader');
           reader.onload = function(e) {
             $('#book-appears-here').html(e.target.result);
             console.log(e.target.result);
@@ -38,9 +39,9 @@ angular.module('bookApp').service('service', function($http, $state) {
           // console.log(theFile);
           reader.readAsText(theFile);
           $state.go('files');
-          // this.saveFile();
           return theFile;
       }
+      this.saveFile();
   };
 
   // this.uploadBook = function(inputElement) {
@@ -139,8 +140,13 @@ angular.module('bookApp').service('service', function($http, $state) {
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.saveFile = function() {
     var newFile = {};
-    newFile.title = theFile.name;
-    newFile.text = $('#book-appears-here').html().toString();
+    if (theFile.title) {
+      newFile.title = theFile.title;
+      newFile.text = theFile.text;
+    } else {
+      newFile.title = theFile.name;
+      newFile.text = $('#book-appears-here').html().toString();
+    }
     this.files.push(newFile);
     console.log(newFile);
     // console.log(newFile.title);
@@ -188,7 +194,7 @@ angular.module('bookApp').service('service', function($http, $state) {
       newBmark.id = selectedText;
       this.bookmarks.push(newBmark);
       theFile.text = theFile.text.replace(selectedText, highlighterStyles + selectedText + '</a>');
-      theFile.text = theFile.text.replace('<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)"><a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">' + selectedText + '</a></a>', '<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">' + selectedText + '</a>');
+      theFile.text = theFile.text.replace(highlighterStyles + highlighterStyles + selectedText + '</a></a>', highlighterStyles + selectedText + '</a>');
       // console.log(document.getElementById('codeword'));
       console.log(theFile.text);
       // console.log(window.getSelection().toString());
@@ -214,9 +220,12 @@ angular.module('bookApp').service('service', function($http, $state) {
   };
 
   this.spliceFile = function(file) {
-    console.log(this.files);
+    // console.log(this.files);
+    theFile.title = file.title;
+    theFile.text = file.text;
+    console.log(theFile.text);
+    console.log(theFile.title);
     this.files.splice(this.files.indexOf(file), 1);
-    console.log(this.files);
     // alert('corn');
   };
 
@@ -227,18 +236,18 @@ angular.module('bookApp').service('service', function($http, $state) {
     Arrays stored in variables and used by nav div components.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.files = [
-    {
-      'title': 'Dummy File',
-      'text': 'Dummy text'
-  },
-    {
-      'title': 'Another Dummy',
-      'text': 'Another text'
-    }
+  //   {
+  //     'title': 'Dummy File',
+  //     'text': 'Dummy text'
+  // },
+  //   {
+  //     'title': 'Another Dummy',
+  //     'text': 'Another text'
+  //   }
   ];
   this.bookmarks = [
-    {'id': 'here'},
-    {'id': 'there'}
+    // {'id': 'here'},
+    // {'id': 'there'}
   ];
 
 

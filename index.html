@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="./src/styles/reset.css" media="screen" title="no title">
     <link rel="stylesheet" href="./src/styles/carousel.css" media="screen" title="no title">
     <link rel="stylesheet" href="./src/styles/styles.css" media="screen" title="no title">
+    <link rel="stylesheet" href="./src/components/files/files.css" media="screen" title="no title">
+    <link rel="stylesheet" href="./src/components/bmarks/bmarks.css" media="screen" title="no title">
     <link rel="stylesheet" href="./src/styles/fonts.css" media="screen" title="no title">
     <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
   </head>
@@ -71,9 +73,9 @@
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <div class="side-flex-wrapper">
       <div class="nav-button-wrapper">
-        <span class="nav-button" ui-sref="files">FI</span>
-        <span class="nav-button" ui-sref="chapters">CH</span>
-        <span class="nav-button" ui-sref="bmarks">BMS</span>
+        <span class="file-button" ui-sref="files"></span><span>FILE</span>
+        <!-- <span class="nav-button" ui-sref="chapters">CH</span> -->
+        <span class="bmark-button" ui-sref="bmarks"></span><span>MARK</span>
       </div>
       <div id="nav-div" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
         <div class="overflow-scroll" ui-view="navDiv"></div>
@@ -85,8 +87,8 @@
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <div class="reader-flex-wrapper">
       <div class="reader-button-wrapper">
-        <span class="reader-button" ui-sref="loader">LOAD</span>
-        <span class="reader-button" ui-sref="reader">READ</span>
+        <span class="loader-button" ui-sref="loader"></span><span>LOAD</span>
+        <span class="reader-button" ui-sref="reader"></span><span>READ</span>
       </div>
       <div id="reader-div">
         <div ui-view="centerDiv"></div>

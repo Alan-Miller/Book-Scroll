@@ -16,7 +16,21 @@ angular.module('bookApp').controller('loaderController', function($scope, servic
   //     $state.go('bmarks');
   // });
 
+  $scope.loadLastFile = service.loadLastFile;
+  $scope.loadLastFile();
 
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Uses a function defined in the service to upload books.
+  If there is a change, the function runs.
+  The this keyword refers to <input type="file" id="the-book" class="transparent">.
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  $scope.uploadBook = service.uploadBook;
+  //
+  $("#the-book").change(function() {
+      $scope.uploadBook(this);
+  });
+  
 
 
 });
