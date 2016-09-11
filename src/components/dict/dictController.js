@@ -11,9 +11,13 @@ angular.module('bookApp').controller('dictController', function($scope, service)
     The function is called by the form's ng-submit in the dict.html template.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   $scope.getWord = function(input) {
-    service.getWord(input).then(function(response) {
-      $scope.theWord = response;
-    });
+    if (input === '') {
+      $scope.theWord = {partOfSpeech: 'emptiness', text: 'void'};
+    } else {
+      service.getWord(input).then(function(response) {
+        $scope.theWord = response;
+      });
+    }
   };
 
 });

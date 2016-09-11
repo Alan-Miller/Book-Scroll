@@ -4,11 +4,14 @@
   <div><a>Select a word, then click here to bookmark</a></div>
 </form>
 
-<ul>
-  <li ng-repeat="bookmark in bookmarks">{{bookmark.id}}</li>
+<button id="highlight-button"ng-click="highlightText()">HIGHLIGHT IT</button>
+
+
+<ul class="bmark-list">
+  <li ng-repeat="bookmark in bookmarks"><a>{{bookmark.id}}</a><remove-dad ng-click="spliceBmark(bookmark)">x</remove-dad></li>
 </ul>
 
-<button id="highlight-button"ng-click="highlightText()">HIGHLIGHT IT</button>
+
 
 
 <!-- <bmarker></bmarker> -->

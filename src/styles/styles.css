@@ -182,7 +182,7 @@ form {
   align-items: center;
 }
 
-.file-list li {
+.file-list li, .bmark-list li {
   display: flex;
   justify-content: space-between;
 }
@@ -203,4 +203,9 @@ li remove-dad {
 
 span {
   cursor: pointer;
+}
+
+
+.codeword {
+  background-color: red;
 }

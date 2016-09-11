@@ -1,5 +1,8 @@
 angular.module('bookApp').controller('readerController', function($scope, service) {
 
+  $scope.loadLastFile = service.loadLastFile;
+  $scope.loadLastFile();
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   Uses a function defined in the service to upload books.

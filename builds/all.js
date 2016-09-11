@@ -239,7 +239,7 @@ angular.module('bookApp').directive('removeDad', function () {
 //     // console.log(this.innerHTML);
 // });
 
-angular.module('bookApp').service('service', function ($http) {
+angular.module('bookApp').service('service', function ($http, $state) {
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     This function pulls word definitions from the Wordnik API.
@@ -276,9 +276,37 @@ angular.module('bookApp').service('service', function ($http) {
       };
       // console.log(theFile);
       reader.readAsText(theFile);
+      $state.go('files');
+      // this.saveFile();
       return theFile;
     }
   };
+
+  // this.uploadBook = function(inputElement) {
+  //     theFile = inputElement.files[0];
+  //     if (inputElement.files && theFile) {
+  //
+  //         var reader = new FileReader();
+  //         var placeForText = $('#book-appears-here');
+  //
+  //         reader.onload = function(e) {
+  //           placeForText.html(e.target.result);
+  //           // console.log(placeForText.html());
+  //           // console.log(e.target.result);
+  //         };
+  //         // console.log(theFile);
+  //         theFile.text = placeForText.html().toString();
+  //         reader.readAsText(theFile);
+  //         console.log('title and text');
+  //         // console.log(theFile);
+  //         theFile.title = theFile.name;
+  //         console.log(theFile.title);
+  //         console.log(theFile.text);
+  //         // theFile.text = placeForText.html();
+  //         // console.log(theFile.text);
+  //         return theFile;
+  //     }
+  // };
 
   // this.shareTheFile = function() {
   //   theFile = theFile;
@@ -387,12 +415,36 @@ angular.module('bookApp').service('service', function ($http) {
   this.highlightText = function () {
     var loadedText = document.getElementById("book-appears-here");
     var selectedText = '';
+    var newBmark = {};
+    var highlighterStyles = '<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">';
     // console.log(loadedText.innerHTML);
     // if (loadedText.getSelection) {
     // loadedText.getSelection().toString();
-    console.log(window.getSelection().toString());
+    selectedText = window.getSelection().toString();
+    newBmark.id = selectedText;
+    this.bookmarks.push(newBmark);
+    theFile.text = theFile.text.replace(selectedText, highlighterStyles + selectedText + '</a>');
+    theFile.text = theFile.text.replace('<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)"><a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">' + selectedText + '</a></a>', '<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">' + selectedText + '</a>');
+    // console.log(document.getElementById('codeword'));
+    console.log(theFile.text);
+    // console.log(window.getSelection().toString());
     // }
+    $('#book-appears-here').html(theFile.text);
     // console.log(newFile.title);
+  };
+
+  this.unhighlight = function (bmark) {
+    theFile.text = theFile.text.replace('<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">' + bmark + '</a>', bmark);
+    console.log(theFile.text);
+    $('#book-appears-here').html(theFile.text);
+  };
+
+  this.spliceBmark = function (bmark) {
+    // console.log(this.bookmarks);
+    this.bookmarks.splice(this.bookmarks.indexOf(bmark), 1);
+    // console.log(this.bookmarks);
+    // alert('corn');
+    this.unhighlight(bmark.id);
   };
 
   this.spliceFile = function (file) {
@@ -425,6 +477,10 @@ angular.module('bookApp').controller('bmarksController', function ($scope, servi
   $scope.bookmarks = service.bookmarks;
 
   $scope.highlightText = service.highlightText;
+
+  $scope.unhighlight = service.unhighlight;
+
+  $scope.spliceBmark = service.spliceBmark;
 
   // $scope.look = 'okay then';
   // $scope.test = 'Why don\'t you work';
@@ -484,9 +540,13 @@ angular.module('bookApp').controller('dictController', function ($scope, service
     The function is called by the form's ng-submit in the dict.html template.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   $scope.getWord = function (input) {
-    service.getWord(input).then(function (response) {
-      $scope.theWord = response;
-    });
+    if (input === '') {
+      $scope.theWord = { partOfSpeech: 'emptiness', text: 'void' };
+    } else {
+      service.getWord(input).then(function (response) {
+        $scope.theWord = response;
+      });
+    }
   };
 });
 
@@ -525,6 +585,9 @@ angular.module('bookApp').controller('loaderController', function ($scope, servi
 });
 
 angular.module('bookApp').controller('readerController', function ($scope, service) {
+
+  $scope.loadLastFile = service.loadLastFile;
+  $scope.loadLastFile();
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     Uses a function defined in the service to upload books.
