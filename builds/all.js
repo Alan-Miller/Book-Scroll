@@ -7,17 +7,41 @@ angular.module('bookApp', ['ui.router']).config(function ($stateProvider, $urlRo
   $stateProvider.state('loader', {
     url: '/',
     views: {
-      'textDiv': {
+      'centerDiv': {
         controller: 'loaderController',
         templateUrl: 'src/components/loader/loader.html'
+      },
+      // 'navDiv': {
+      //   controller: 'bmarksController',
+      //   templateUrl: 'src/components/bmarks/bmarks.html'
+      // },
+      'navDiv': {
+        controller: 'filesController',
+        templateUrl: 'src/components/files/files.html'
+      },
+      'wordDiv': {
+        controller: 'dictController',
+        templateUrl: 'src/components/dict/dict.html'
       }
     }
   }).state('reader', {
     url: '/reader',
     views: {
-      'textDiv': {
+      'centerDiv': {
         controller: 'readerController',
         templateUrl: 'src/components/reader/reader.html'
+      },
+      'navDiv': {
+        controller: 'bmarksController',
+        templateUrl: 'src/components/bmarks/bmarks.html'
+      },
+      // 'navDiv': {
+      //   controller: 'filesController',
+      //   templateUrl: 'src/components/files/files.html'
+      // },
+      'wordDiv': {
+        controller: 'dictController',
+        templateUrl: 'src/components/dict/dict.html'
       }
     }
   }).state('dict', {
@@ -26,6 +50,18 @@ angular.module('bookApp', ['ui.router']).config(function ($stateProvider, $urlRo
       'wordDiv': {
         controller: 'dictController',
         templateUrl: 'src/components/dict/dict.html'
+      },
+      'navDiv': {
+        controller: 'bmarksController',
+        templateUrl: 'src/components/bmarks/bmarks.html'
+      },
+      // 'navDiv': {
+      //   controller: 'filesController',
+      //   templateUrl: 'src/components/files/files.html'
+      // },
+      'centerDiv': {
+        controller: 'readerController',
+        templateUrl: 'src/components/reader/reader.html'
       }
     }
   }).state('bmarks', {
@@ -34,17 +70,52 @@ angular.module('bookApp', ['ui.router']).config(function ($stateProvider, $urlRo
       'navDiv': {
         controller: 'bmarksController',
         templateUrl: 'src/components/bmarks/bmarks.html'
+      },
+      'wordDiv': {
+        controller: 'dictController',
+        templateUrl: 'src/components/dict/dict.html'
+      },
+      'centerDiv': {
+        controller: 'readerController',
+        templateUrl: 'src/components/reader/reader.html'
       }
     }
   }).state('chapters', {
     url: '/chapters',
     views: {
-      'navDiv': {
-        controller: 'chaptersController',
-        templateUrl: 'src/components/chapters/chapters.html'
+      // 'navDiv': {
+      //   controller: 'bmarksController',
+      //   templateUrl: 'src/components/bmarks/bmarks.html'
+      // },
+      // 'navDiv': {
+      //   controller: 'filesController',
+      //   templateUrl: 'src/components/files/files.html'
+      // },
+      'wordDiv': {
+        controller: 'dictController',
+        templateUrl: 'src/components/dict/dict.html'
+      },
+      'centerDiv': {
+        controller: 'readerController',
+        templateUrl: 'src/components/reader/reader.html'
       }
     }
-
+  }).state('files', {
+    url: '/files',
+    views: {
+      'navDiv': {
+        controller: 'filesController',
+        templateUrl: 'src/components/files/files.html'
+      },
+      'wordDiv': {
+        controller: 'dictController',
+        templateUrl: 'src/components/dict/dict.html'
+      },
+      'centerDiv': {
+        controller: 'readerController',
+        templateUrl: 'src/components/reader/reader.html'
+      }
+    }
   });
 });
 
@@ -69,6 +140,34 @@ angular.module('bookApp').controller('mainController', function ($scope, service
   };
   // $scope.bookBump();
 
+  $scope.oK = function () {
+    var isOkay = confirm('Are you really okay?');
+    if (isOkay) {
+      alert('I am glad you are okay.');
+    } else {
+      alert('I know a place that might help.');
+      window.location.replace('http://okay.org/');
+    }
+  };
+});
+
+angular.module('bookApp').directive('removeDad', function () {
+  return {
+    restrict: 'AE',
+    // scope: {
+    // lesson: '=',
+    // name: '=',
+    // unicorn: '='
+    // },
+    controller: function controller($scope, service) {
+      // $scope.getSchedule = lessonService.getSchedule();
+    },
+    link: function link(scope, elem, attrs) {
+      elem.bind('click', function () {
+        elem.parent().remove();
+      });
+    }
+  };
 });
 
 // <div onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';"></div>
@@ -143,7 +242,7 @@ angular.module('bookApp').controller('mainController', function ($scope, service
 angular.module('bookApp').service('service', function ($http) {
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    THIS FUNCTION PULLS WORD DEFINITIONS FROM THE WORDNIK API
+    This function pulls word definitions from the Wordnik API.
     Merriam-Webster and Yandex gave data that was less immediately helpful
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.getWord = function (input) {
@@ -160,12 +259,12 @@ angular.module('bookApp').service('service', function ($http) {
   };
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    THIS FUNCTION UPLOADS THE TEXT FILE
+    Uploads the text file.
     - inputElement is my parameter representing the element <input type="file" id="the-book" class="transparent"> (see function in readerController)
     - inputElement.files is the array with the uploaded file
     - inputElement.files[0] contains the desired file data
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  var theFile = 'bug';
+  var theFile = { title: 'About Steve', text: 'Steve sucks.' };
 
   this.uploadBook = function (inputElement) {
     theFile = inputElement.files[0];
@@ -173,45 +272,163 @@ angular.module('bookApp').service('service', function ($http) {
       var reader = new FileReader();
       reader.onload = function (e) {
         $('#book-appears-here').html(e.target.result);
-        // console.log(e.target.result);
+        console.log(e.target.result);
       };
+      // console.log(theFile);
       reader.readAsText(theFile);
       return theFile;
     }
   };
 
-  this.shareTheFile = function () {
-    theFile = theFile;
-    return theFile;
+  // this.shareTheFile = function() {
+  //   theFile = theFile;
+  //   return theFile;
+  // };
+
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    Loads blob files stored in variables.
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  this.loadLastFile = function () {
+    console.log(theFile);
+    $('#book-appears-here').html(theFile.text);
   };
 
-  this.loadSavedBook = function () {
-    theFile = theFile;
-    if (theFile instanceof Blob) {
-      // Check to see if theFile variable contains a blob object
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#book-appears-here').html(e.target.result);
-        // console.log(e.target.result);
-      };
-      reader.readAsText(theFile);
-      return theFile;
-    }
+  // this.loadLastFile = function() {
+  //     // if (theFile instanceof Blob) { // Check to see if theFile variable contains a blob object
+  //         var reader = new FileReader();
+  //         reader.onload = function(e) {
+  //           $('#book-appears-here').html(e.target.result);
+  //           // console.log(e.target.result);
+  //         };
+  //         console.log(theFile);
+  //         reader.readAsText(theFile);
+  //         return theFile;
+  //     // }
+  // };
+
+  // this.loadLastFile = function() {
+  //     if (theFile instanceof Blob) { // Check to see if theFile variable contains a blob object
+  //         var reader = new FileReader();
+  //         reader.onload = function(e) {
+  //           $('#book-appears-here').html(e.target.result);
+  //           // console.log(e.target.result);
+  //         };
+  //         console.log(theFile);
+  //         reader.readAsText(theFile);
+  //         return theFile;
+  //     }
+  // };
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    Loads the file you click into the reader.
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  this.loadThisFile = function (file) {
+    theFile.title = file.title;
+    theFile.text = file.text;
+    console.log(theFile);
+    $('#book-appears-here').html(theFile.text);
   };
 
-  // console.log(theFile);
-  // $("#the-book").change(function() {
-  //     uploadBook(this);
-  // });
+  // this.loadThisFile = function(fileText) {
+  //     if (fileText instanceof Blob) { // Check to see if theFile variable contains a blob object
+  //         var reader = new FileReader();
+  //         reader.onload = function(e) {
+  //           $('#book-appears-here').html(e.target.result);
+  //           // console.log(e.target.result);
+  //         };
+  //         console.log(fileText);
+  //         reader.readAsText(fileText);
+  //         return fileText;
+  //     }
+  // };
 
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    Saves the blob as a new file
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  this.saveFile = function () {
+    var newFile = {};
+    newFile.title = theFile.name;
+    newFile.text = $('#book-appears-here').html().toString();
+    this.files.push(newFile);
+    console.log(newFile);
+    // console.log(newFile.title);
+  };
+
+  // this.saveFile = function() {
+  //   var newFile = {};
+  //   var arrayItem;
+  //   for (var i = 0; i < this.files.length; i++) {
+  //     var noRepeats = true;
+  //     arrayItem = this.files[i];
+  //     if (arrayItem.indexOf(theFile.name) !== -1) {
+  //       noRepeats = false;
+  //     }
+  //     if (noRepeats) {
+  //       newFile.title = theFile.name;
+  //       newFile.text = theFile;
+  //       this.files.push(newFile);
+  //     }
+  //   }
+  //   // console.log(newFile.title);
+  // };
+
+
+  // this.saveFile = function() {
+  //   var newFile = {};
+  //   newFile.title = theFile.name;
+  //   newFile.text = document.getElementById("book-appears-here").innerHTML;
+  //   this.files.push(newFile);
+  //   // console.log(newFile.title);
+  // };
+
+
+  this.highlightText = function () {
+    var loadedText = document.getElementById("book-appears-here");
+    var selectedText = '';
+    // console.log(loadedText.innerHTML);
+    // if (loadedText.getSelection) {
+    // loadedText.getSelection().toString();
+    console.log(window.getSelection().toString());
+    // }
+    // console.log(newFile.title);
+  };
+
+  this.spliceFile = function (file) {
+    console.log(this.files);
+    this.files.splice(this.files.indexOf(file), 1);
+    console.log(this.files);
+    // alert('corn');
+  };
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    Arrays stored in variables and used by nav div components.
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  this.files = [{
+    'title': 'Dummy File',
+    'text': 'Dummy text'
+  }, {
+    'title': 'Another Dummy',
+    'text': 'Another text'
+  }];
+  this.bookmarks = [{ 'id': 'here' }, { 'id': 'there' }];
 });
+
+// console.log(theFile);
+// $("#the-book").change(function() {
+//     uploadBook(this);
+// });
 
 angular.module('bookApp').controller('bmarksController', function ($scope, service) {
 
-  $scope.bookmarks = [{ 'id': 'here' }, { 'id': 'there' }];
+  $scope.bookmarks = service.bookmarks;
+
+  $scope.highlightText = service.highlightText;
 
   // $scope.look = 'okay then';
-  $scope.test = 'Why don\'t you work';
+  // $scope.test = 'Why don\'t you work';
+
 });
 
 angular.module('bookApp').directive('bmarker', function () {
@@ -263,14 +480,27 @@ angular.module('bookApp').controller('dictController', function ($scope, service
   document.getElementById("defbox").focus();
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    Takes user input and sends to service function, which makes Wordnik request
+    Takes user input and sends to service function, which makes Wordnik request.
+    The function is called by the form's ng-submit in the dict.html template.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   $scope.getWord = function (input) {
     service.getWord(input).then(function (response) {
       $scope.theWord = response;
     });
   };
-  // The function is called by the form's ng-submit in the dict.html template
+});
+
+angular.module('bookApp').controller('filesController', function ($scope, service) {
+
+  $scope.files = service.files;
+
+  $scope.loadLastFile = service.loadLastFile;
+
+  $scope.loadThisFile = service.loadThisFile;
+
+  $scope.saveFile = service.saveFile;
+
+  $scope.spliceFile = service.spliceFile;
 });
 
 angular.module('bookApp').controller('loaderController', function ($scope, service) {
@@ -297,28 +527,32 @@ angular.module('bookApp').controller('loaderController', function ($scope, servi
 angular.module('bookApp').controller('readerController', function ($scope, service) {
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    Uses a function defined in the service to upload books
+    Uses a function defined in the service to upload books.
+    If there is a change, the function runs.
+    The this keyword refers to <input type="file" id="the-book" class="transparent">.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
   $scope.uploadBook = service.uploadBook;
-  // If there is a change, the function runs
+  //
   $("#the-book").change(function () {
     $scope.uploadBook(this);
-    // this refers to the element <input type="file" id="the-book" class="transparent">
-    // $scope.theFile = service.uploadBook(this);
-    // return $scope.theFile;
   });
 
-  $scope.showTheFile = function () {
-    $scope.theFile = service.shareTheFile();
-    // $scope.theFile = service.theFile;
-    alert($scope.theFile);
-    // alert('service.theFile:', service.theFile);
-    // alert($scope.theFile);
-  };
-
-  $scope.loadSavedBook = service.loadSavedBook;
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    Here we place a function on $scope to allow the reading div to load the blob
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 });
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Test function for showing the blob stored in a variable by the service function
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+// $scope.showTheFile = function() {
+//   $scope.theFile = service.shareTheFile();
+//   // $scope.theFile = service.theFile;
+//   alert($scope.theFile);
+//   // alert('service.theFile:', service.theFile);
+//   // alert($scope.theFile);
+// };
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   THIS UPLOAD FUNCTION WORKS, BUT I MOVED TO THE SERVICE

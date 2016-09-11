@@ -1,13 +1,16 @@
-<p>BOOKMARKS HERE</p>
+<p>BOOKMARKS</p>
 
 <form class="" action="index.html" method="post">
-  <div><a ng-click="alert('bagel')">Select a word, then click here to bookmark</a></div>
+  <div><a>Select a word, then click here to bookmark</a></div>
 </form>
 
 <ul>
   <li ng-repeat="bookmark in bookmarks">{{bookmark.id}}</li>
 </ul>
 
-<bmarker></bmarker>
+<button id="highlight-button"ng-click="highlightText()">HIGHLIGHT IT</button>
 
-{{test}}
+
+<!-- <bmarker></bmarker> -->
+
+<!-- {{test}} -->

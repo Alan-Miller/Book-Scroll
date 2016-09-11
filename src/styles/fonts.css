@@ -6,26 +6,6 @@
   font-size: 2.1em;
 }
 
-/*.char1, .char3, .char6, .char9, .char11 {
-    -webkit-transform: scale(1) skewY(-15deg);
-    -o-transform: scale(1) skewY(-15deg);
-    -moz-transform: scale(1) skewY(-15deg);
-    -ms-transform: scale(1) skewY(-15deg);
-    transform: scale(1) skewY(-15deg);
-    background: #e24b3b url(http://pcdn.paravel.netdna-cdn.com/wp-content/uploads/2011/05/dots.png) left top;
-    background-size: 175%;
-}*/
-
-/*.char2, .char5, .char8, .char10, .char12 {
-    -webkit-transform: scale(1) skewY(15deg);
-    -o-transform: scale(1) skewY(15deg);
-    -moz-transform: scale(1) skewY(15deg);
-    -ms-transform: scale(1) skewY(15deg);
-    transform: scale(1) skewY(15deg);
-    background: #a93629 url(http://pcdn.paravel.netdna-cdn.com/wp-content/uploads/2011/05/dots.png) center top;
-    background-size: 175%;
-}*/
-
 .book-scroll-title {
     text-align: center;
     width: 100%;
@@ -34,6 +14,9 @@
     color: rgb(236, 177, 173);
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Basic dimensions for all letters B O O K S C R O L L
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .char1, .char2, .char3, .char4, .char5, .char6, .char7, .char8, .char9, .char10, .char11 {
   /*transform: skewX();*/
   font-size: 4em;
@@ -45,8 +28,11 @@
   box-shadow: 7px 7px 10px 0px rgba(36, 36, 36, .8);
 }
 .char5 {
-  box-shadow: 0px 0px 0px 0px white;
+  box-shadow: 0px 0px 0px 0px white; /* Reset the space character */
 }
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Skew the divs
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .char1, .char3, .char7, .char9, .char11 {
   -webkit-transform: skewY(20deg);
      -moz-transform: skewY(20deg);
@@ -58,26 +44,35 @@
 	     -o-transform: skewY(-20deg);
   margin: -5px;
 }
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Color the divs and add borders (which create the look of a book spine)
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .char1, .char3, .char6, .char8, .char10 {
   border-right: thick solid rgb(223, 72, 64);
-  background-color: rgb(217, 56, 46);
-}
+  background-color: rgb(217, 56, 46);}
+  .char1:after, .char3:after, .char6:after, .char8:after, .char10:after {
+    content: '';
+    height: 90px;
+    width: 65px;
+    position: absolute;
+    border-left: thin solid rgb(159, 24, 17);
+    right: -65px;
+  }
 .char2, .char4, .char7, .char9, .char11 {
   border-left: thick solid rgb(159, 24, 17);
-  background-color: rgb(184, 18, 8);
-}
-.char2:after, .char4:after, .char7:after, .char9:after, .char11:after {
-  content: '';
-  border-left: 1px solid rgb(159, 24, 17);
-  border-right: 2px solid rgb(133, 19, 13);
-  /*background-color: rgb(159, 24, 17);*/
-  height: 84px;
-  width: 9px;
-  /*background-color: rgb(184, 18, 8);*/
-  position: absolute;
-  left: -10px;
-  top: 3px;
-}
+  background-color: rgb(149, 12, 4);}
+  .char2:after, .char4:after, .char7:after, .char9:after, .char11:after {
+    content: '';
+    border-right: 2px solid rgb(133, 19, 13);
+    height: 90px;
+    width: 65px;
+    position: absolute;
+    left: -65px;
+  }
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Pages for letters B O O K
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .char1:before, .char2:before, .char3:before, .char4:before {
   content: '';
   background-color: rgb(254, 219, 217);
@@ -91,6 +86,9 @@
   left: -5px;
   width: 59px;
 }
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Pages for letters S C R O L L
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .char6:before, .char7:before, .char8:before, .char9:before, .char10:before, .char11:before {
   content: '';
   background-color: rgb(254, 219, 217);

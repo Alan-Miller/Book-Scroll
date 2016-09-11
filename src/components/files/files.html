@@ -1,0 +1,10 @@
+<p>FILES</p>
+
+
+
+<button ng-click="loadLastFile()">GET</button>
+<button ng-click="saveFile()">SAVE</button>
+
+<ul class="file-list">
+  <li ng-repeat="file in files"><a ng-click="loadThisFile(file)">{{file.title}}</a><remove-dad ng-click="spliceFile(file)">x</remove-dad></li>
+</ul>

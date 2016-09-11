@@ -16,6 +16,9 @@
   </head>
   <body>
 
+  <!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    CAROUSEL HEADER
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
   <header class="splash-header">
     <section class="carousel-container">
       <img src="./src/img/unsplash/bw/lean.jpg"/>
@@ -34,12 +37,15 @@
 
   <section class="main-section">
 
+    <!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+      B O O K   S C R O L L   letters
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <span class="book-scroll-title" ng-controller="mainController">
       <span class="book-wrapper" ng-mouseover="bookBump()" ui-sref="loader">
         <span class="char1">B</span>
         <span class="char2">O</span>
       </span>
-      <span class="book-wrapper" ng-mouseover="bookBump()" ui-sref="loader">
+      <span class="book-wrapper" ng-mouseover="bookBump()" ui-sref="loader" ng-click="oK()">
         <span class="char3">O</span>
         <span class="char4">K</span>
       </span>
@@ -59,52 +65,49 @@
         <span class="char11">L</span>
       </span>
     </span>
-    <!-- {{theFile}} -->
 
+    <!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+      LEFT DIV (NAV BOX)
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <div class="side-flex-wrapper">
       <div class="nav-button-wrapper">
+        <span class="nav-button" ui-sref="files">FI</span>
         <span class="nav-button" ui-sref="chapters">CH</span>
         <span class="nav-button" ui-sref="bmarks">BMS</span>
       </div>
       <div id="nav-div" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
-        <!-- NAV DIV -->
         <div class="overflow-scroll" ui-view="navDiv"></div>
       </div>
     </div>
 
+    <!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+      CENTER DIV (READING BOX)
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <div class="reader-flex-wrapper">
       <div class="reader-button-wrapper">
         <span class="reader-button" ui-sref="loader">LOAD</span>
         <span class="reader-button" ui-sref="reader">READ</span>
       </div>
       <div id="reader-div">
-        <!-- <p>READER DIV</p> -->
-        <div ui-view="textDiv"></div>
-        <!-- <form runat="server">
-          <button type="button" class="btn btn-danger">Upload book<input type="file" id="the-book" class="transparent"/></button>
-          <p id="book-appears-here"></p>
-        </form> -->
+        <div ui-view="centerDiv"></div>
+          <!-- <button type="button" class="btn btn-danger">Upload book<input type="file" id="the-book" class="transparent"/></button>
+          <p id="book-appears-here"></p> -->
+        </form>
       </div>
     </div>
 
+    <!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+      RIGHT DIV (DICTIONARY BOX)
+    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <div class="side-flex-wrapper">
       <div class="dict-button-wrapper">
         <span class="dict-button" ui-sref="dict">WORDS</span>
-        <!-- <span class="dict-button" ui-sref="dict">DICT 2</span> -->
       </div>
       <div id="dict-div" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
-        <!-- DICTIONARY DIV -->
         <div ui-view="wordDiv"></div>
-        <!-- <p>Don't know a word? Look it up!</p>
-          <form ng-submit="getWord(input)">
-            <input type="text" ng-model="input">
-            <div class="bold line-spaces">{{input}}</div>
-          </form>
-          <p ng-repeat="def in theWord">
-            <span class="em line-spaces"> {{def.partOfSpeech}} </span> {{def.text}}
-          </p> -->
       </div>
     </div>
+
   </section>
 
 
@@ -126,7 +129,9 @@
     <script type="text/javascript" src="./src/components/loader/loaderController.js"></script>
     <script type="text/javascript" src="./src/components/dict/dictController.js"></script>
     <script type="text/javascript" src="./src/components/chapters/chaptersController.js"></script>
+    <script type="text/javascript" src="./src/components/files/filesController.js"></script>
     <script type="text/javascript" src="./src/components/bmarks/bmarksController.js"></script>
     <script type="text/javascript" src="./src/components/bmarks/bmarksDirective.js"></script>
+    <script type="text/javascript" src="./src/js/removeDad.js"></script>
   </body>
 </html>

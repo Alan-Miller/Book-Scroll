@@ -181,3 +181,26 @@ form {
   flex-direction: column;
   align-items: center;
 }
+
+.file-list li {
+  display: flex;
+  justify-content: space-between;
+}
+
+li remove-dad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: rgb(170, 170, 170);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  background-position: left;
+}
+
+
+span {
+  cursor: pointer;
+}

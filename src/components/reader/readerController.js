@@ -1,32 +1,35 @@
 angular.module('bookApp').controller('readerController', function($scope, service) {
 
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  Uses a function defined in the service to upload books
+  Uses a function defined in the service to upload books.
+  If there is a change, the function runs.
+  The this keyword refers to <input type="file" id="the-book" class="transparent">.
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-
   $scope.uploadBook = service.uploadBook;
-  // If there is a change, the function runs
+  //
   $("#the-book").change(function() {
       $scope.uploadBook(this);
-      // this refers to the element <input type="file" id="the-book" class="transparent">
-      // $scope.theFile = service.uploadBook(this);
-      // return $scope.theFile;
   });
 
-  $scope.showTheFile = function() {
-    $scope.theFile = service.shareTheFile();
-    // $scope.theFile = service.theFile;
-    alert($scope.theFile);
-    // alert('service.theFile:', service.theFile);
-    // alert($scope.theFile);
-  };
-
-  $scope.loadSavedBook = service.loadSavedBook;
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    Here we place a function on $scope to allow the reading div to load the blob
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 });
 
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Test function for showing the blob stored in a variable by the service function
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+// $scope.showTheFile = function() {
+//   $scope.theFile = service.shareTheFile();
+//   // $scope.theFile = service.theFile;
+//   alert($scope.theFile);
+//   // alert('service.theFile:', service.theFile);
+//   // alert($scope.theFile);
+// };
 
 
 

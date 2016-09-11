@@ -1,10 +1,12 @@
 <!-- <a>DICTIONARY HERE</a> -->
 
 <p>Look up words!</p>
+
 <form ng-submit="getWord(input)">
-  <input id="defbox" type="text" ng-model="input">
+  <input id="defbox" type="text" ng-model="input" autocomplete="off">
   <div class="bold line-spaces">{{input}}</div>
 </form>
+
 <p ng-repeat="def in theWord">
   <span class="em line-spaces"> {{def.partOfSpeech}} </span> {{def.text}}
 </p>
