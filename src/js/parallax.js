@@ -6,7 +6,7 @@ $(window).scroll(function() {
 
   // $('.book-scroll-title').css({'transform': 'translate(-' + winScroll / 80 + '%, 0px)'});
 
-  $('.book-scroll-title').css({'transform' :'translate(0px, ' + winScroll / 3 + '%)'});
+  $('.book-scroll-title').css({'transform' :'translate(0px, ' + winScroll * -0.3 + '%)'});
 
   // $('.bo').css({'position': 'absolute', 'transform': 'rotate(-' + winScroll / 2 + 'deg)'});
   // $('.ok').css({'position': 'absolute', 'transform': 'rotate(-' + winScroll / 2 + 'deg)'});
