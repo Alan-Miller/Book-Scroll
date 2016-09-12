@@ -67,6 +67,10 @@ angular.module('bookApp', ['ui.router']).config(function ($stateProvider, $urlRo
   }).state('bmarks', {
     url: '/bmarks',
     views: {
+      'centerDiv': {
+        controller: 'readerController',
+        templateUrl: 'src/components/reader/reader.html'
+      },
       'navDiv': {
         controller: 'bmarksController',
         templateUrl: 'src/components/bmarks/bmarks.html'
@@ -74,10 +78,6 @@ angular.module('bookApp', ['ui.router']).config(function ($stateProvider, $urlRo
       'wordDiv': {
         controller: 'dictController',
         templateUrl: 'src/components/dict/dict.html'
-      },
-      'centerDiv': {
-        controller: 'readerController',
-        templateUrl: 'src/components/reader/reader.html'
       }
     }
   }).state('chapters', {
@@ -264,12 +264,14 @@ angular.module('bookApp').service('service', function ($http, $state) {
     - inputElement.files is the array with the uploaded file
     - inputElement.files[0] contains the desired file data
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  var theFile = { title: 'About Steve', text: 'Steve sucks.' };
+  var theFile = { title: '', text: '' };
 
   this.uploadBook = function (inputElement) {
     theFile = inputElement.files[0];
+    this.saveFile();
     if (inputElement.files && theFile) {
       var reader = new FileReader();
+      $state.go('reader');
       reader.onload = function (e) {
         $('#book-appears-here').html(e.target.result);
         console.log(e.target.result);
@@ -277,9 +279,9 @@ angular.module('bookApp').service('service', function ($http, $state) {
       // console.log(theFile);
       reader.readAsText(theFile);
       $state.go('files');
-      // this.saveFile();
       return theFile;
     }
+    // this.saveFile();
   };
 
   // this.uploadBook = function(inputElement) {
@@ -375,14 +377,39 @@ angular.module('bookApp').service('service', function ($http, $state) {
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     Saves the blob as a new file
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  this.saveFile = function () {
+  this.saveFile = function (inputTitle) {
     var newFile = {};
-    newFile.title = theFile.name;
-    newFile.text = $('#book-appears-here').html().toString();
+    if (inputTitle) {
+      newFile.title = inputTitle;
+      newFile.text = $('#book-appears-here').html().toString();
+    } else if (theFile.title) {
+      newFile.title = theFile.title;
+      newFile.text = theFile.text;
+      alert('here');
+    } else {
+      newFile.title = theFile.name;
+      newFile.text = $('#book-appears-here').html().toString();
+      alert('where');
+    }
     this.files.push(newFile);
     console.log(newFile);
     // console.log(newFile.title);
   };
+
+  // this.saveFile = function() {
+  //   var newFile = {};
+  //   if (theFile.title) {
+  //     newFile.title = theFile.title;
+  //     newFile.text = theFile.text;
+  //   } else {
+  //     newFile.title = theFile.name;
+  //     newFile.text = $('#book-appears-here').html().toString();
+  //   }
+  //   this.files.push(newFile);
+  //   console.log(newFile);
+  //   // console.log(newFile.title);
+  // };
+
 
   // this.saveFile = function() {
   //   var newFile = {};
@@ -412,20 +439,25 @@ angular.module('bookApp').service('service', function ($http, $state) {
   // };
 
 
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    Highlights selected text
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  var highlighterStyles = '<a id="bookmark" style="color: black; background-color: rgb(254, 209, 76); border-radius: 10px">';
+
   this.highlightText = function () {
     var loadedText = document.getElementById("book-appears-here");
     var selectedText = '';
     var newBmark = {};
-    var highlighterStyles = '<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">';
     // console.log(loadedText.innerHTML);
     // if (loadedText.getSelection) {
     // loadedText.getSelection().toString();
     selectedText = window.getSelection().toString();
-    newBmark.id = selectedText;
+    newBmark.id = selectedText.split(' ').slice(0, 5).join(' ');
     this.bookmarks.push(newBmark);
     theFile.text = theFile.text.replace(selectedText, highlighterStyles + selectedText + '</a>');
-    theFile.text = theFile.text.replace('<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)"><a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">' + selectedText + '</a></a>', '<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">' + selectedText + '</a>');
-    // console.log(document.getElementById('codeword'));
+    theFile.text = theFile.text.replace(highlighterStyles + highlighterStyles + selectedText + '</a></a>', highlighterStyles + selectedText + '</a>');
+    theFile.text = theFile.text.replace(highlighterStyles + highlighterStyles + selectedText + '</a></a>', highlighterStyles + selectedText + '</a>');
+    // console.log(document.getElementById('bookmark'));
     console.log(theFile.text);
     // console.log(window.getSelection().toString());
     // }
@@ -434,7 +466,7 @@ angular.module('bookApp').service('service', function ($http, $state) {
   };
 
   this.unhighlight = function (bmark) {
-    theFile.text = theFile.text.replace('<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">' + bmark + '</a>', bmark);
+    theFile.text = theFile.text.replace(highlighterStyles + bmark + '</a>', bmark);
     console.log(theFile.text);
     $('#book-appears-here').html(theFile.text);
   };
@@ -448,23 +480,32 @@ angular.module('bookApp').service('service', function ($http, $state) {
   };
 
   this.spliceFile = function (file) {
-    console.log(this.files);
+    // console.log(this.files);
+    theFile.title = file.title;
+    theFile.text = file.text;
+    console.log(theFile.text);
+    console.log(theFile.title);
     this.files.splice(this.files.indexOf(file), 1);
-    console.log(this.files);
     // alert('corn');
   };
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     Arrays stored in variables and used by nav div components.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  this.files = [{
-    'title': 'Dummy File',
-    'text': 'Dummy text'
-  }, {
-    'title': 'Another Dummy',
-    'text': 'Another text'
-  }];
-  this.bookmarks = [{ 'id': 'here' }, { 'id': 'there' }];
+  this.files = [
+    //   {
+    //     'title': 'Dummy File',
+    //     'text': 'Dummy text'
+    // },
+    //   {
+    //     'title': 'Another Dummy',
+    //     'text': 'Another text'
+    //   }
+  ];
+  this.bookmarks = [
+    // {'id': 'here'},
+    // {'id': 'there'}
+  ];
 });
 
 // console.log(theFile);
@@ -481,6 +522,10 @@ angular.module('bookApp').controller('bmarksController', function ($scope, servi
   $scope.unhighlight = service.unhighlight;
 
   $scope.spliceBmark = service.spliceBmark;
+
+  $scope.loadLastFile = service.loadLastFile;
+  console.log($scope.loadLastFile());
+  $scope.loadLastFile();
 
   // $scope.look = 'okay then';
   // $scope.test = 'Why don\'t you work';
@@ -555,6 +600,7 @@ angular.module('bookApp').controller('filesController', function ($scope, servic
   $scope.files = service.files;
 
   $scope.loadLastFile = service.loadLastFile;
+  $scope.loadLastFile();
 
   $scope.loadThisFile = service.loadThisFile;
 
@@ -581,7 +627,19 @@ angular.module('bookApp').controller('loaderController', function ($scope, servi
   //     $state.go('bmarks');
   // });
 
+  $scope.loadLastFile = service.loadLastFile;
+  $scope.loadLastFile();
 
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  Uses a function defined in the service to upload books.
+  If there is a change, the function runs.
+  The this keyword refers to <input type="file" id="the-book" class="transparent">.
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  $scope.uploadBook = service.uploadBook;
+  //
+  $("#the-book").change(function () {
+    $scope.uploadBook(this);
+  });
 });
 
 angular.module('bookApp').controller('readerController', function ($scope, service) {

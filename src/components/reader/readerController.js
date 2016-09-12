@@ -1,8 +1,5 @@
 angular.module('bookApp').controller('readerController', function($scope, service) {
 
-  $scope.loadLastFile = service.loadLastFile;
-  $scope.loadLastFile();
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   Uses a function defined in the service to upload books.
@@ -19,6 +16,11 @@ angular.module('bookApp').controller('readerController', function($scope, servic
     Here we place a function on $scope to allow the reading div to load the blob
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+
+
+
+  $scope.loadLastFile = service.loadLastFile;
+  $scope.loadLastFile();
 });
 
 

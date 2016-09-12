@@ -16,8 +16,7 @@ angular.module('bookApp').controller('loaderController', function($scope, servic
   //     $state.go('bmarks');
   // });
 
-  $scope.loadLastFile = service.loadLastFile;
-  $scope.loadLastFile();
+
 
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -30,7 +29,8 @@ angular.module('bookApp').controller('loaderController', function($scope, servic
   $("#the-book").change(function() {
       $scope.uploadBook(this);
   });
-  
 
 
+  $scope.loadLastFile = service.loadLastFile;
+  // $scope.loadLastFile();
 });

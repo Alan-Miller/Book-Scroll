@@ -24,19 +24,22 @@ angular.module('bookApp').service('service', function($http, $state) {
   - inputElement.files is the array with the uploaded file
   - inputElement.files[0] contains the desired file data
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  var theFile = {title: '', text: ''};
+  var theFile = {title: 'Dummy Title', text: 'Go to the Load Screen to read files here'};
 
 
   this.uploadBook = function(inputElement) {
       theFile = inputElement.files[0];
+      theFile.title = theFile.name;
       if (inputElement.files && theFile) {
           var reader = new FileReader();
           $state.go('reader');
           reader.onload = function(e) {
             $('#book-appears-here').html(e.target.result);
-            console.log(e.target.result);
+            theFile.text = e.target.result;
           };
-          // console.log(theFile);
+          setTimeout(function() {
+            theFile.text = $('#book-appears-here').html();
+          }, 1000);
           reader.readAsText(theFile);
           $state.go('files');
           return theFile;
@@ -81,7 +84,7 @@ angular.module('bookApp').service('service', function($http, $state) {
     Loads blob files stored in variables.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.loadLastFile = function() {
-    console.log(theFile);
+    // console.log(theFile.text);
     $('#book-appears-here').html(theFile.text);
   };
 
@@ -117,7 +120,7 @@ angular.module('bookApp').service('service', function($http, $state) {
   this.loadThisFile = function(file) {
     theFile.title = file.title;
     theFile.text = file.text;
-    console.log(theFile);
+    // console.log(theFile);
     $('#book-appears-here').html(theFile.text);
   };
 
@@ -138,9 +141,12 @@ angular.module('bookApp').service('service', function($http, $state) {
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     Saves the blob as a new file
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  this.saveFile = function() {
+  this.saveFile = function(inputTitle) {
     var newFile = {};
-    if (theFile.title) {
+    if (inputTitle) {
+      newFile.title = inputTitle;
+      newFile.text = $('#book-appears-here').html().toString();
+    } else if (theFile.title) {
       newFile.title = theFile.title;
       newFile.text = theFile.text;
     } else {
@@ -148,9 +154,22 @@ angular.module('bookApp').service('service', function($http, $state) {
       newFile.text = $('#book-appears-here').html().toString();
     }
     this.files.push(newFile);
-    console.log(newFile);
     // console.log(newFile.title);
   };
+
+  // this.saveFile = function() {
+  //   var newFile = {};
+  //   if (theFile.title) {
+  //     newFile.title = theFile.title;
+  //     newFile.text = theFile.text;
+  //   } else {
+  //     newFile.title = theFile.name;
+  //     newFile.text = $('#book-appears-here').html().toString();
+  //   }
+  //   this.files.push(newFile);
+  //   console.log(newFile);
+  //   // console.log(newFile.title);
+  // };
 
 
   // this.saveFile = function() {
@@ -182,20 +201,28 @@ angular.module('bookApp').service('service', function($http, $state) {
   // };
 
 
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    Highlights selected text
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  var highlighterStyles = '<a id="bookmark" style="color: black; background-color: rgb(254, 209, 76); border-radius: 10px">';
+
   this.highlightText = function() {
-    var loadedText = document.getElementById("book-appears-here");
+    // var loadedText = document.getElementById("book-appears-here");
     var selectedText = '';
     var newBmark = {};
-    var highlighterStyles = '<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">';
     // console.log(loadedText.innerHTML);
     // if (loadedText.getSelection) {
       // loadedText.getSelection().toString();
-      selectedText = window.getSelection().toString();
-      newBmark.id = selectedText;
+      selectedText = window.getSelection();
+      newBmark.selection = selectedText.toString();
+      newBmark.id = newBmark.selection.split(' ').slice(0, 5).join(' ');
+      // alert(newBmark.id);
       this.bookmarks.push(newBmark);
+      selectedText = selectedText.toString();
       theFile.text = theFile.text.replace(selectedText, highlighterStyles + selectedText + '</a>');
       theFile.text = theFile.text.replace(highlighterStyles + highlighterStyles + selectedText + '</a></a>', highlighterStyles + selectedText + '</a>');
-      // console.log(document.getElementById('codeword'));
+      // console.log(document.getElementById('bookmark'));
       console.log(theFile.text);
       // console.log(window.getSelection().toString());
     // }
@@ -204,7 +231,7 @@ angular.module('bookApp').service('service', function($http, $state) {
   };
 
   this.unhighlight = function(bmark) {
-    theFile.text = theFile.text.replace('<a id="codeword" style="color: white; background-color: rgb(217, 56, 46)">' + bmark + '</a>', bmark);
+    theFile.text = theFile.text.replace(highlighterStyles + bmark + '</a>', bmark);
     console.log(theFile.text);
     $('#book-appears-here').html(theFile.text);
   };
@@ -216,7 +243,7 @@ angular.module('bookApp').service('service', function($http, $state) {
     this.bookmarks.splice(this.bookmarks.indexOf(bmark), 1);
     // console.log(this.bookmarks);
     // alert('corn');
-    this.unhighlight(bmark.id);
+    this.unhighlight(bmark.selection);
   };
 
   this.spliceFile = function(file) {

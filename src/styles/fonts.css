@@ -11,7 +11,8 @@
     width: 100%;
     position: absolute;
     top: -120px;
-    color: rgb(236, 177, 173);
+    color: rgb(37, 37, 37);
+    text-shadow: -2px 0 rgb(101, 12, 7), 0 1px rgb(182, 55, 55), 1px 0 rgb(213, 75, 75), 0 -1px rgb(196, 55, 55);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -49,18 +50,18 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .char1, .char3, .char6, .char8, .char10 {
   border-right: thick solid rgb(223, 72, 64);
-  background-color: rgb(217, 56, 46);}
+  background-color: rgb(200, 33, 23);}
   .char1:after, .char3:after, .char6:after, .char8:after, .char10:after {
     content: '';
     height: 90px;
     width: 65px;
     position: absolute;
-    border-left: thin solid rgb(159, 24, 17);
+    border-left: thin solid rgb(139, 21, 15);
     right: -65px;
   }
 .char2, .char4, .char7, .char9, .char11 {
   border-left: thick solid rgb(159, 24, 17);
-  background-color: rgb(149, 12, 4);}
+  background-color: rgb(136, 25, 18);}
   .char2:after, .char4:after, .char7:after, .char9:after, .char11:after {
     content: '';
     border-right: 2px solid rgb(133, 19, 13);
@@ -75,7 +76,7 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .char1:before, .char2:before, .char3:before, .char4:before {
   content: '';
-  background-color: rgb(254, 219, 217);
+  background-color: rgb(244, 225, 224);
   position: absolute;
   top: -4px;
   width: 65px;

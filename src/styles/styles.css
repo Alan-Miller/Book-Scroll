@@ -3,19 +3,11 @@ body {
   background-image: url("../img/bgbooks-fixed-dark.png");
   background-repeat: repeat;
   background-size: 30%;
-  /*height: 2200px;*/
+  height: 2200px;
   font-family: 'Roboto', sans-serif;
   /*box-sizing: border-box;*/
+  color: rgb(37, 37, 37);
 }
-
-
-.main-section {
-  position: relative;
-  display:flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
 .reader-flex-wrapper {
   /*background-color: white;*/
   width: 48%;
@@ -46,9 +38,15 @@ body {
   /*justify-content: center;*/
   /*top: 50px;*/
 }
+.mini-header {
+  color: rgb(69, 69, 69);
+  font-size: 1.9em;
+  text-align: center;
+  padding: 10px 0px;
+}
 #nav-div, #dict-div {
   position: fixed;
-  background-color: rgba(255, 255, 255, .75);
+  background-color: rgba(221, 221, 221, .8);
   height: 50%;
   width: 23%;
   border-radius: 7px;
@@ -56,16 +54,55 @@ body {
   overflow: scroll;
   padding: 10px;
   border-width: 44px 12px 12px 12px;
-  border-color: rgb(217, 56, 46);
+  border-color: rgb(200, 33, 23);
   border-style: solid;
-  /*box-shadow: 0px -8px 0px 11px rgb(217, 56, 46);*/
+  /*box-shadow: 0px -8px 0px 11px rgb(200, 33, 23);*/
+  color: rgb(69, 69, 69);
+}
+/*::-webkit-scrollbar {
+  display: none;
+}*/
+#nav-div input[type="text"], #dict-div input[type="text"]{
+  /*position: fixed;*/
+  background-color: rgba(221, 221, 221, 0);
+  height: 15px;
+  width: 85%;
+  border-radius: 33px;
+  /*overflow: scroll;*/
+  padding: 10px;
+  border-width: 4px;
+  border-color: rgb(200, 33, 23);
+  border-style: dashed;
+  /*box-shadow: 0px -8px 0px 11px rgb(200, 33, 23);*/
+  font-size: 1.7em;
+  text-align: center;
+  margin: 10px 0;
+  color: rgb(69, 69, 69);
+}
+#nav-div button {
+  /*position: fixed;*/
+  background-color: rgb(200, 33, 23);
+  height: 28px;
+  width: 65%;
+  border-radius: 33px;
+  top: 42%;
+  font-size: .9em;
+  text-align: center;
+  margin: 4px 0;
+  color: rgba(221, 221, 221, .8);
+}
+.main-section {
+  position: relative;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .nav-button-wrapper, .dict-button-wrapper, .reader-button-wrapper {
   position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-end;
+  align-items: flex;
   top: calc(42% - 46px);
   min-width: 10%;
   z-index: 3;
@@ -94,14 +131,39 @@ body {
   margin: 0 12px;
   cursor: pointer;
 }
+.file-button:before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  border-left: 2px solid rgb(16, 75, 214);
+  border-right: 2px solid rgb(16, 75, 214);
+  border-top: 2px solid rgb(16, 75, 214);
+  border-bottom: 2px solid rgb(16, 75, 214);
+  width: 10px;
+  height: 28px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.file-button:after {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 7px;
+  border-right: 2px solid rgb(16, 75, 214);
+  border-bottom: 2px solid rgb(16, 75, 214);
+  width: 6px;
+  height: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
 .bmark-button {
-  /*background-color: rgb(217, 56, 46);*/
+  /*background-color: rgb(200, 33, 23);*/
   width: 0px;
   height: 0px;
   border-radius: 5%;
-  border-left: 12px solid rgb(217, 56, 46);
-  border-right: 12px solid rgb(217, 56, 46);
-  border-top: 27px solid rgb(217, 56, 46);
+  border-left: 12px solid rgb(200, 33, 23);
+  border-right: 12px solid rgb(200, 33, 23);
+  border-top: 27px solid rgb(200, 33, 23);
   border-bottom: 15px solid transparent;
   margin: 0 12px;
   cursor: pointer;
@@ -119,10 +181,10 @@ body {
   left: -12px;
 }
 .reader-button {
-  background-color: rgb(217, 56, 46);
+  background-color: rgb(200, 33, 23);
   width: 32px;
   height: 40px;
-  border-left: 2px solid rgb(254, 96, 88);
+  border-left: 2px solid rgb(223, 58, 50);
   border-right: 2px solid rgb(116, 23, 18);
   border-radius: 5px 2px 2px 5px;
   margin: 0 12px;
@@ -190,7 +252,7 @@ body {
   margin: 0 12px;
   font-size: 330%;
   font-weight: bold;
-  color: rgb(217, 56, 46);
+  color: rgb(200, 33, 23);
   cursor: pointer;
 }
 .dict-button:before {
@@ -202,7 +264,7 @@ body {
   height: 40px;
   font-size: 69%;
   font-weight: bold;
-  color: rgb(255, 143, 136);
+  color: rgb(241, 107, 99);
   transform: rotate(-29deg);
 }
 .dict-button:after {
@@ -214,7 +276,7 @@ body {
   height: 40px;
   font-size: 69%;
   font-weight: bold;
-  color: rgb(43, 8, 5);
+  color: rgb(17, 1, 0);
   transform: rotate(17deg);
 }
 
@@ -235,7 +297,7 @@ body {
 
 #reader-div button{
   max-width: 200px;
-  background-color: rgb(217, 56, 46);
+  background-color: rgb(200, 33, 23);
   outline: none;
   border: none;
   border-radius: 8px;
@@ -266,9 +328,9 @@ body {
     padding: .5em;
 }*/
 
-input {
+input, button {
   outline: none;
-  min-width: 200px;
+  /*min-width: 200px;*/
 }
 
 form {
@@ -279,8 +341,12 @@ form {
 
 .file-list li, .bmark-list li {
   display: flex;
-  justify-content: space-between;
-  line-height: 1.3em;
+  justify-content: space-around;
+  line-height: 1.8em;
+}
+.bmark-list li a {
+  background-color: rgb(254, 209, 76);
+  margin: 2px;
 }
 .file-list li a, .bmark-list li a {
   width: 70%;
@@ -292,7 +358,7 @@ li remove-dad {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: rgb(209, 62, 52);
+  background-color: RGB(200, 33, 23);
   color: white;
   border-radius: 50%;
   width: 18px;
@@ -306,7 +372,7 @@ span {
 }
 
 
-.codeword {
+.bookmark {
   background-color: red;
 }
 
@@ -335,7 +401,7 @@ span {
   left: -16px;
 }
 #load-book:before {
-  content: 'Click book to load';
+  content: '';
   padding: 20px;
   font-size: 1.3em;
   line-height: 1.4em;

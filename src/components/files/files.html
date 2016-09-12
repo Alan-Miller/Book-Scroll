@@ -1,7 +1,16 @@
 <p class="mini-header">FILES</p>
 
 <!-- <button ng-click="loadLastFile()">GET</button> -->
-<button ng-click="saveFile()">SAVE</button>
+
+
+
+<form ng-submit="saveFile(title)">
+  <!-- <h4>Enter title and author, separated by comma</h4> -->
+  <input type="text" name="name" placeholder="enter file name" ng-model="title" autocomplete="off">
+</form>
+<form>
+  <button ng-click="saveFile()">or push to auto-name</button>
+</form>
 
 <ul class="file-list">
   <li ng-repeat="file in files"><a ng-click="loadThisFile(file)">{{file.title}}</a><remove-dad ng-click="spliceFile(file)">x</remove-dad></li>

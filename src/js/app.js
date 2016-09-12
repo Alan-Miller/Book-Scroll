@@ -71,6 +71,10 @@ $stateProvider
 .state('bmarks', {
   url: '/bmarks',
   views: {
+    'centerDiv': {
+      controller: 'readerController',
+      templateUrl: 'src/components/reader/reader.html'
+    },
     'navDiv': {
       controller: 'bmarksController',
       templateUrl: 'src/components/bmarks/bmarks.html'
@@ -78,10 +82,6 @@ $stateProvider
     'wordDiv': {
       controller: 'dictController',
       templateUrl: 'src/components/dict/dict.html'
-    },
-    'centerDiv': {
-      controller: 'readerController',
-      templateUrl: 'src/components/reader/reader.html'
     }
   }
 })

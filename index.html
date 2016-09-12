@@ -43,26 +43,26 @@
       B O O K   S C R O L L   letters
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <span class="book-scroll-title" ng-controller="mainController">
-      <span class="book-wrapper" ng-mouseover="bookBump()" ui-sref="loader">
+      <span class="bo book-wrapper" ng-mouseover="bookBump()" ui-sref="loader">
         <span class="char1">B</span>
         <span class="char2">O</span>
       </span>
-      <span class="book-wrapper" ng-mouseover="bookBump()" ui-sref="loader" ng-click="oK()">
+      <span class="ok book-wrapper" ng-mouseover="bookBump()" ui-sref="loader" ng-click="oK()">
         <span class="char3">O</span>
         <span class="char4">K</span>
       </span>
       <span class="char5">
         &nbsp&nbsp&nbsp&nbsp
       </span>
-      <span class="book-wrapper" ng-mouseover="bookBump()" ui-sref="loader">
+      <span class="sc book-wrapper" ng-mouseover="bookBump()" ui-sref="loader">
         <span class="char6">S</span>
         <span class="char7">C</span>
       </span>
-      <span class="book-wrapper" ng-mouseover="bookBump()" ui-sref="loader">
+      <span class="ro book-wrapper" ng-mouseover="bookBump()" ui-sref="loader">
         <span class="char8">R</span>
         <span class="char9">O</span>
       </span>
-      <span class="book-wrapper" ng-mouseover="bookBump()" ui-sref="loader">
+      <span class="ll book-wrapper" ng-mouseover="bookBump()" ui-sref="loader">
         <span class="char10">L</span>
         <span class="char11">L</span>
       </span>
@@ -71,7 +71,7 @@
     <!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
       LEFT DIV (NAV BOX)
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <div class="side-flex-wrapper">
+    <div class="side-flex-wrapper" ng-click="loadLastFile()">
       <div class="nav-button-wrapper">
         <span class="file-button" ui-sref="files"></span><span>FILE</span>
         <!-- <span class="nav-button" ui-sref="chapters">CH</span> -->
@@ -134,6 +134,7 @@
     <script type="text/javascript" src="./src/components/files/filesController.js"></script>
     <script type="text/javascript" src="./src/components/bmarks/bmarksController.js"></script>
     <script type="text/javascript" src="./src/components/bmarks/bmarksDirective.js"></script>
+    <script type="text/javascript" src="./src/js/parallax.js"></script>
     <script type="text/javascript" src="./src/js/removeDad.js"></script>
   </body>
 </html>
