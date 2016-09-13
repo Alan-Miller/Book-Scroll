@@ -53,7 +53,7 @@ body {
 }
 #nav-div, #dict-div {
   position: fixed;
-  background-color: rgba(221, 221, 221, .8);
+  background-color: rgba(251, 251, 251, .8);
   height: 50%;
   width: 23%;
   border-radius: 2px 2px 2px 2px;
@@ -86,10 +86,10 @@ body {
   margin: 10px 0;
   color: rgb(69, 69, 69);
 }
-::placeholder {
+/*::placeholder {
   border: thick solid yellow;
-}
-#nav-div button {
+}*/
+#file-button, #highlight-button {
   /*position: fixed;*/
   background-color: rgb(200, 33, 23);
   height: 28px;
@@ -100,7 +100,13 @@ body {
   text-align: center;
   margin: 4px 0;
   color: rgba(221, 221, 221, .8);
+  cursor: pointer;
 }
+#highlight-button {
+  color: rgb(254, 209, 76);
+}
+
+
 .main-section {
   position: relative;
   display:flex;
@@ -354,7 +360,8 @@ form {
 .file-list li, .bmark-list li {
   display: flex;
   justify-content: space-around;
-  line-height: 1.8em;
+  line-height: 1.5em;
+  margin: 5px auto;
   cursor: pointer;
 }
 .bmark-list li a {
@@ -389,7 +396,7 @@ span {
   background-color: red;
 }
 
-#load-book {
+#magic-book {
   background-color: rgb(62, 119, 247);
   width: 148px;
   height: 180px;
@@ -399,7 +406,7 @@ span {
   border-radius: 20px 2px 2px 20px;
   position: relative;
 }
-#load-book:after {
+#magic-book:after {
   content: '';
   background-color: lightgray;
   border-right: none;
@@ -413,7 +420,7 @@ span {
   bottom: -3px;
   left: -16px;
 }
-#load-book:before {
+#magic-book:before {
   content: '';
   padding: 20px;
   font-size: 1.3em;
@@ -432,3 +439,6 @@ span {
   top: 0;
   left: -1px;
 }
+
+
+/* flex-wrapper nav-div div form */

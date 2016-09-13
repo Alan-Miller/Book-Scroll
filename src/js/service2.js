@@ -34,9 +34,9 @@ UPLOADER
           }, 1000);
           reader.readAsText(theFile);
           $state.go('files');
-          // this.saveFile();  // Auto-saves incoming files. Tends to negate manual save option. And it's not working correctly.
           return theFile;
       }
+      this.saveFile();
   };
 
 
@@ -89,6 +89,50 @@ UPLOADER
 
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  HIGHLIGHTER
+    Highlights selected text
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  var highlighterStyles = '<a id="bookmark" style="color: black; background-color: rgb(254, 209, 76); border-radius: 10px">';
+
+  this.highlightText = function() {
+    // var loadedText = document.getElementById("book-appears-here");
+    var selectedText = '';
+    var newBmark = {};
+    // if (loadedText.getSelection) {
+      // loadedText.getSelection().toString();
+      selectedText = window.getSelection();
+      newBmark.selection = selectedText.toString();
+      newBmark.id = newBmark.selection.split(' ').slice(0, 5).join(' ');
+      // alert(newBmark.id);
+      this.bookmarks.push(newBmark);
+      selectedText = selectedText.toString();
+      theFile.text = theFile.text.replace(selectedText, highlighterStyles + selectedText + '</a>');
+      theFile.text = theFile.text.replace(highlighterStyles + highlighterStyles + selectedText + '</a></a>', highlighterStyles + selectedText + '</a>');
+      console.log(theFile.text);
+    // }
+    $('#book-appears-here').html(theFile.text);
+  };
+
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  UNHIGHLIGHTER
+    Unhighlights text.
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  this.unhighlight = function(bmark) {
+    theFile.text = theFile.text.replace(highlighterStyles + bmark + '</a>', bmark);
+    console.log(theFile.text);
+    $('#book-appears-here').html(theFile.text);
+  };
+  this.spliceBmark = function(bmark) {
+    // console.log(this.bookmarks);
+    this.bookmarks.splice(this.bookmarks.indexOf(bmark), 1);
+    // console.log(this.bookmarks);
+    // alert('corn');
+    this.unhighlight(bmark.selection);
+  };
+
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   SPLICE FILE
     Splices deleted files from files list.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -112,79 +156,6 @@ UPLOADER
   this.returnFiles = function() {
     return files;
   };
-
-
-  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  HIGHLIGHTER
-    Highlights selected text.
-    Finds and highlights text from input form.
-  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  var highlighterStyles = '<a id="bookmark" style="color: black; background-color: rgb(254, 209, 76); border-radius: 10px">';
-
-  this.highlightText = function(searchInput) {
-    // var loadedText = document.getElementById("book-appears-here");
-    var selectedText = '';
-    var newBmark = {};
-    // if (window.getSelection()) {
-    if (searchInput) {
-      newBmark.input = searchInput;
-      newBmark.id = searchInput;
-      this.bookmarks.push(newBmark);
-      var re = new RegExp(searchInput, 'g');
-      theFile.text = theFile.text.replace(re, highlighterStyles + searchInput + '</a>');
-      // theFile.text = theFile.text.replace(highlighterStyles + highlighterStyles + selectedText + '</a></a>', highlighterStyles + selectedText + '</a>');
-    } else {
-      // loadedText.getSelection().toString();
-      selectedText = window.getSelection();
-      newBmark.selection = selectedText.toString();
-      newBmark.id = newBmark.selection.split(' ').slice(0, 7).join(' ');
-      // alert(newBmark.id);
-      this.bookmarks.push(newBmark);
-      selectedText = selectedText.toString();
-      theFile.text = theFile.text.replace(selectedText, highlighterStyles + selectedText + '</a>');
-      theFile.text = theFile.text.replace(highlighterStyles + highlighterStyles + selectedText + '</a></a>', highlighterStyles + selectedText + '</a>');
-      // console.log(theFile.text);
-    }
-    $('#book-appears-here').html(theFile.text);
-  };
-
-
-  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  SPLICE HIGHLIGHT
-    Splices deleted highlights from highlights list.
-  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  this.spliceBmark = function(bmark) {
-    // console.log(this.bookmarks);
-    this.bookmarks.splice(this.bookmarks.indexOf(bmark), 1);
-    // console.log(this.bookmarks);
-    // alert('corn');
-    this.unhighlight(bmark.selection, bmark.input);
-  };
-
-
-  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  UNHIGHLIGHTER
-    Unhighlights text.
-    Splices deleted highlights from highlights list.
-  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  this.unhighlight = function(selection, input) {
-    if (input) {
-      var wrappedText = highlighterStyles + input + '</a>';
-
-      while (theFile.text.indexOf(wrappedText) !== -1) {
-        theFile.text = theFile.text.replace(wrappedText, input);
-      }
-      $('#book-appears-here').html(theFile.text);
-    } else if (selection) {
-      theFile.text = theFile.text.replace(highlighterStyles + selection + '</a>', selection);
-      $('#book-appears-here').html(theFile.text);
-    }
-  };
-
-
-
-
-
 
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

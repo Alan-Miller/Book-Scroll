@@ -1,8 +1,14 @@
 <p class="mini-header">HIGHLIGHTS</p>
 
 <form>
-  <div><a>select a word and <button id="highlight-button"ng-click="highlightText()">highlight it</button></a></div>
+  <div><a>select a word and </a></div>
+  <button id="highlight-button" ng-click="highlightText()">highlight it</button>
 </form>
+
+<form ng-submit="highlightText(searchInput)">
+  <input type="text" id="finder" ng-model="searchInput"></input>
+</form>
+<!-- <span>FIND</span> -->
 
 
 <ul class="bmark-list">

@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
     <link rel="stylesheet" href="./src/styles/reset.css" media="screen" title="no title">
     <link rel="stylesheet" href="./src/styles/carousel.css" media="screen" title="no title">
+    <link rel="stylesheet" href="./src/styles/magic.css" media="screen" title="no title">
     <link rel="stylesheet" href="./src/styles/styles.css" media="screen" title="no title">
     <link rel="stylesheet" href="./src/components/files/files.css" media="screen" title="no title">
     <link rel="stylesheet" href="./src/components/bmarks/bmarks.css" media="screen" title="no title">
@@ -43,7 +44,7 @@
       B O O K   S C R O L L   letters
     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <span class="book-scroll-title" ng-controller="mainController">
-      <span class="bo book-wrapper" ng-mouseover="bookBump()" ui-sref="loader">
+      <span class="bo book-wrapper bombLeftOut" ng-mouseover="bookBump()" ui-sref="loader">
         <span class="char1">B</span>
         <span class="char2">O</span>
       </span>
@@ -78,7 +79,7 @@
         <span class="bmark-button" ui-sref="bmarks"></span><span>MARK</span>
       </div>
       <div id="nav-div" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
-        <div class="overflow-scroll" ui-view="navDiv"></div>
+        <div ui-view="navDiv"></div>
       </div>
     </div>
 
@@ -89,7 +90,7 @@
       <div class="reader-button-wrapper">
         <span class="loader-button" ui-sref="loader"></span><span>LOAD</span>
         <span class="reader-button" ui-sref="reader"></span><span>READ</span>
-      </div>
+        </div>
       <div id="reader-div">
         <div ui-view="centerDiv"></div>
           <!-- <button type="button" class="btn btn-danger">Upload book<input type="file" id="the-book" class="transparent"/></button>
