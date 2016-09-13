@@ -19,8 +19,7 @@ angular.module('bookApp').controller('readerController', function($scope, servic
 
 
 
-  $scope.loadLastFile = service.loadLastFile;
-  $scope.loadLastFile();
+  service.loadLastFile();
 });
 
 

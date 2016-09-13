@@ -33,14 +33,14 @@ $stateProvider
       controller: 'readerController',
       templateUrl: 'src/components/reader/reader.html'
     },
-    'navDiv': {
-      controller: 'bmarksController',
-      templateUrl: 'src/components/bmarks/bmarks.html'
-    },
     // 'navDiv': {
-    //   controller: 'filesController',
-    //   templateUrl: 'src/components/files/files.html'
+    //   controller: 'bmarksController',
+    //   templateUrl: 'src/components/bmarks/bmarks.html'
     // },
+    'navDiv': {
+      controller: 'filesController',
+      templateUrl: 'src/components/files/files.html'
+    },
     'wordDiv': {
       controller: 'dictController',
       templateUrl: 'src/components/dict/dict.html'

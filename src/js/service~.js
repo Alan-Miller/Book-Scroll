@@ -18,16 +18,12 @@ angular.module('bookApp').service('service', function($http, $state) {
   };
 
 
-/*
   this.loadArrayFromStorage = function() {
     var tempObj = {};
     for (var key in localStorage) {
       // localStorage.getItem(key);
       // console.log(localStorage.getItem(key));
       console.log(key);
-      open lS
-      for every item
-      push item to files
       tempObj.title = key;
       tempObj.text = localStorage[key];
       files.push(tempObj);
@@ -37,7 +33,7 @@ angular.module('bookApp').service('service', function($http, $state) {
   };
 
   // console.log(files)
-*/
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -178,6 +174,8 @@ angular.module('bookApp').service('service', function($http, $state) {
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.saveFile = function(inputTitle) {
     var newFile = {};
+    var storageTitle;
+    var storageText;
     if (inputTitle) {
       newFile.title = inputTitle;
       newFile.text = $('#book-appears-here').html().toString();
@@ -188,11 +186,11 @@ angular.module('bookApp').service('service', function($http, $state) {
       newFile.title = theFile.name;
       newFile.text = $('#book-appears-here').html().toString();
     }
-    // localStorage.setItem(newFile.title, newFile.text);
-    // console.log(newFile.title);
-    // console.log(localStorage[newFile.title]);
+    localStorage.setItem(newFile.title, newFile.text);
+    console.log(newFile.title);
+    console.log(localStorage[newFile.title]);
     files.push(newFile);
-    // console.log(files);
+    console.log(files);
     return files;
     // console.log(newFile.title);
   };
@@ -292,12 +290,11 @@ angular.module('bookApp').service('service', function($http, $state) {
     theFile.text = file.text;
     console.log(theFile.text);
     console.log(theFile.title);
-    files.splice(files.indexOf(file), 1);
-    return files;
+    return files.splice(files.indexOf(file), 1);
     // alert('corn');
   };
 
-  this.returnFiles = function() {
+  this.shareFiles = function() {
     return files;
   };
 

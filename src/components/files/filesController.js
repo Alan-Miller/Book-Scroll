@@ -1,6 +1,6 @@
 angular.module('bookApp').controller('filesController', function($scope, service) {
 
-  $scope.files = service.files;
+  $scope.files = service.returnFiles();
 
   $scope.loadThisFile = service.loadThisFile;
 

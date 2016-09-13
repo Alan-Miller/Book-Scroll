@@ -30,6 +30,8 @@ angular.module('bookApp').controller('loaderController', function($scope, servic
       $scope.uploadBook(this);
   });
 
+  $scope.loadArrayFromStorage = service.loadArrayFromStorage;
+
 
   $scope.loadLastFile = service.loadLastFile;
   // $scope.loadLastFile();
