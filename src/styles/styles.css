@@ -53,14 +53,14 @@ body {
 }
 #nav-div, #dict-div {
   position: fixed;
-  background-color: rgba(251, 251, 251, .8);
+  background-color: rgba(255, 255, 255, .8);
   height: 50%;
   width: 23%;
   border-radius: 2px 2px 2px 2px;
   top: 43%;
   overflow: scroll;
   padding: 10px;
-  border-width: 4px 4px 4px 4px;
+  border-width: 3px;
   border-color: rgb(200, 33, 23);
   border-style: solid;
   /*box-shadow: 0px -8px 0px 11px rgb(200, 33, 23);*/
@@ -73,7 +73,7 @@ body {
   /*position: fixed;*/
   background-color: rgba(221, 221, 221, 0);
   height: 15px;
-  width: 85%;
+  width: 93%;
   border-radius: 33px;
   /*overflow: scroll;*/
   padding: 10px;
@@ -81,7 +81,7 @@ body {
   border-color: rgb(200, 33, 23);
   border-style: dotted;
   /*box-shadow: 0px -8px 0px 11px rgb(200, 33, 23);*/
-  font-size: 1.7em;
+  font-size: 1.4em;
   text-align: center;
   margin: 10px 0;
   color: rgb(69, 69, 69);
@@ -119,25 +119,32 @@ body {
   position: fixed;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
   top: calc(42% - 40px);
   min-width: 10%;
-  z-index: 3;
   padding-right: 9%;
   color: lightgray;
-  /*background-color: yellow;*/
+  z-index: 2;
+  color: rgb(163, 162, 162);
+  /*background-color: rgba(255, 0, 0, 0.5);;*/
 }
-.dict-button-wrapper {
-  padding-right: 0;
+.reader-button-wrapper span {
+  display: flex;
+  flex-direction: row;
   justify-content: flex-end;
+  align-items: flex-end;
 }
 .reader-button-wrapper {
   position: relative;
   padding-right: 0;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-end;
   top: 20px;
+}
+.dict-button-wrapper {
+  padding-right: 0;
+  justify-content: flex-end;
 }
 .file-button {
   background-color: lightgray;
@@ -355,6 +362,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .file-list li, .bmark-list li {
@@ -372,7 +380,6 @@ form {
   width: 70%;
 }
 
-
 li remove-dad {
   display: flex;
   justify-content: center;
@@ -386,11 +393,9 @@ li remove-dad {
   background-position: left;
 }
 
-
 span {
   cursor: pointer;
 }
-
 
 .bookmark {
   background-color: red;
@@ -440,5 +445,9 @@ span {
   left: -1px;
 }
 
-
-/* flex-wrapper nav-div div form */
+.fileName {
+  color: rgb(163, 162, 162);
+  position: relative;
+  left: 200px;
+  top: -70px;
+}

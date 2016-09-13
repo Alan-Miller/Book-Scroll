@@ -17,6 +17,7 @@ angular.module('bookApp').controller('readerController', function($scope, servic
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
+  $scope.fileName = (service.returnTheFile()).title; //Grabs document title from service
 
 
   service.loadLastFile();

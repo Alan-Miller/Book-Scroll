@@ -7,9 +7,9 @@ angular.module('bookApp')
         // name: '=',
         // unicorn: '='
       // },
-      controller: function($scope, service) {
+      // controller: function($scope, service) {
         // $scope.getSchedule = lessonService.getSchedule();
-      },
+      // },
       link: function(scope, elem, attrs) {
         elem.bind('click', function() {
           elem.parent().remove();

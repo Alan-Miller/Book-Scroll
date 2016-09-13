@@ -19,5 +19,4 @@ angular.module('bookApp').controller('mainController', function($scope, service)
     }
   };
 
-
 });

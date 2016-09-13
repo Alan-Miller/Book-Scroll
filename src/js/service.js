@@ -7,7 +7,8 @@ DATA ARRAYS AND OBJECTS
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 var files = [];
 this.bookmarks = [];
-var theFile = {title: 'Dummy Title', text: 'Go to the Load Screen to read files here'};
+var theFile = {title: 'Dummy Title', text: 'Go to the Load screen to read files here'};
+var highlighterStyles = '<a id="bookmark" style="color: black; background-color: rgb(254, 209, 76); border-radius: 10px">';
 
 
 
@@ -34,7 +35,7 @@ UPLOADER
           }, 1000);
           reader.readAsText(theFile);
           $state.go('files');
-          // this.saveFile();  // Auto-saves incoming files. Tends to negate manual save option. And it's not working correctly.
+          // this.saveFile();  // Auto-saves incoming files. Tends to negate manual save option. And it's not correctly adding the text.
           return theFile;
       }
   };
@@ -60,9 +61,7 @@ UPLOADER
     // console.log(newFile.title);
     // console.log(localStorage[newFile.title]);
     files.push(newFile);
-    // console.log(files);
     return files;
-    // console.log(newFile.title);
   };
 
 
@@ -115,35 +114,44 @@ UPLOADER
 
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  RETURN CURRENT FILE
+    Makes theFile available to the mainController
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  this.returnTheFile = function() {
+    return theFile;
+  };
+
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   HIGHLIGHTER
     Highlights selected text.
     Finds and highlights text from input form.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  var highlighterStyles = '<a id="bookmark" style="color: black; background-color: rgb(254, 209, 76); border-radius: 10px">';
-
   this.highlightText = function(searchInput) {
     // var loadedText = document.getElementById("book-appears-here");
+    console.log(searchInput);
     var selectedText = '';
     var newBmark = {};
-    // if (window.getSelection()) {
     if (searchInput) {
-      newBmark.input = searchInput;
-      newBmark.id = searchInput;
-      this.bookmarks.push(newBmark);
-      var re = new RegExp(searchInput, 'g');
-      theFile.text = theFile.text.replace(re, highlighterStyles + searchInput + '</a>');
-      // theFile.text = theFile.text.replace(highlighterStyles + highlighterStyles + selectedText + '</a></a>', highlighterStyles + selectedText + '</a>');
+      if (theFile.text.indexOf(searchInput) !== -1) {
+        newBmark.input = searchInput;
+        newBmark.id = searchInput + ' ( x' + (theFile.text.split(searchInput).length - 1) + ' )'; // Count number of instances of the search term
+        this.bookmarks.push(newBmark);
+        var re = new RegExp(searchInput, 'g'); // Add highlights to text
+        theFile.text = theFile.text.replace(re, highlighterStyles + searchInput + '</a>');
+      } else {
+        $('#finder').val('\"' + searchInput + '\"' + ' not found'); // Error message
+      }
     } else {
-      // loadedText.getSelection().toString();
       selectedText = window.getSelection();
       newBmark.selection = selectedText.toString();
       newBmark.id = newBmark.selection.split(' ').slice(0, 7).join(' ');
-      // alert(newBmark.id);
-      this.bookmarks.push(newBmark);
-      selectedText = selectedText.toString();
-      theFile.text = theFile.text.replace(selectedText, highlighterStyles + selectedText + '</a>');
-      theFile.text = theFile.text.replace(highlighterStyles + highlighterStyles + selectedText + '</a></a>', highlighterStyles + selectedText + '</a>');
-      // console.log(theFile.text);
+      if (newBmark.id !== '') {
+        this.bookmarks.push(newBmark);
+        selectedText = selectedText.toString();
+        theFile.text = theFile.text.replace(selectedText, highlighterStyles + selectedText + '</a>');
+      }
+      // theFile.text = theFile.text.replace(highlighterStyles + highlighterStyles + selectedText + '</a></a>', highlighterStyles + selectedText + '</a>');
     }
     $('#book-appears-here').html(theFile.text);
   };
@@ -154,9 +162,7 @@ UPLOADER
     Splices deleted highlights from highlights list.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.spliceBmark = function(bmark) {
-    // console.log(this.bookmarks);
     this.bookmarks.splice(this.bookmarks.indexOf(bmark), 1);
-    // console.log(this.bookmarks);
     // alert('corn');
     this.unhighlight(bmark.selection, bmark.input);
   };
@@ -165,12 +171,11 @@ UPLOADER
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   UNHIGHLIGHTER
     Unhighlights text.
-    Splices deleted highlights from highlights list.
+    Removes highlights from text.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.unhighlight = function(selection, input) {
     if (input) {
       var wrappedText = highlighterStyles + input + '</a>';
-
       while (theFile.text.indexOf(wrappedText) !== -1) {
         theFile.text = theFile.text.replace(wrappedText, input);
       }
@@ -180,11 +185,6 @@ UPLOADER
       $('#book-appears-here').html(theFile.text);
     }
   };
-
-
-
-
-
 
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
