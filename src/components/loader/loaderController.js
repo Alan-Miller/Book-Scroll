@@ -33,7 +33,6 @@ angular.module('bookApp').controller('loaderController', function($scope, servic
 
   $scope.loadArrayFromStorage = service.loadArrayFromStorage;
 
-
   $scope.loadLastFile = service.loadLastFile;
   // $scope.loadLastFile();
 });

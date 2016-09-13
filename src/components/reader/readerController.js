@@ -16,11 +16,13 @@ angular.module('bookApp').controller('readerController', function($scope, servic
     Here we place a function on $scope to allow the reading div to load the blob
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+  // $scope.showFileName = function() {
+    $scope.fileName = (service.returnTheFile()).title; //Grabs document title from service
+  // };
+  // $scope.showFileName();
 
-  $scope.fileName = (service.returnTheFile()).title; //Grabs document title from service
 
-
-  service.loadLastFile();
+    service.loadLastFile();
 });
 
 

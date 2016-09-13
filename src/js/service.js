@@ -8,7 +8,7 @@ DATA ARRAYS AND OBJECTS
 var files = [];
 this.bookmarks = [];
 var theFile = {title: 'Dummy Title', text: 'Go to the Load screen to read files here'};
-var highlighterStyles = '<a id="bookmark" style="color: black; background-color: rgb(254, 209, 76); border-radius: 10px">';
+// var highlighterStyles = '<a style="color: black; background-color: rgb(254, 209, 76); border-radius: 10px">';
 
 
 
@@ -58,8 +58,6 @@ UPLOADER
       newFile.text = $('#book-appears-here').html().toString();
     }
     // localStorage.setItem(newFile.title, newFile.text);
-    // console.log(newFile.title);
-    // console.log(localStorage[newFile.title]);
     files.push(newFile);
     return files;
   };
@@ -70,10 +68,9 @@ UPLOADER
     Loads file into the reader from file list.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.loadThisFile = function(file) {
-    $state.go('reader');
+    $state.go('files');
     theFile.title = file.title;
     theFile.text = file.text;
-    // console.log(theFile);
     $('#book-appears-here').html(theFile.text);
   };
 
@@ -138,7 +135,7 @@ UPLOADER
         newBmark.id = searchInput + ' ( x' + (theFile.text.split(searchInput).length - 1) + ' )'; // Count number of instances of the search term
         this.bookmarks.push(newBmark);
         var re = new RegExp(searchInput, 'g'); // Add highlights to text
-        theFile.text = theFile.text.replace(re, highlighterStyles + searchInput + '</a>');
+        theFile.text = theFile.text.replace(re, '<highlighter>' + searchInput + '</highlighter>');
       } else {
         $('#finder').val('\"' + searchInput + '\"' + ' not found'); // Error message
       }
@@ -149,7 +146,7 @@ UPLOADER
       if (newBmark.id !== '') {
         this.bookmarks.push(newBmark);
         selectedText = selectedText.toString();
-        theFile.text = theFile.text.replace(selectedText, highlighterStyles + selectedText + '</a>');
+        theFile.text = theFile.text.replace(selectedText, '<highlighter>' + selectedText + '</highlighter>');
       }
       // theFile.text = theFile.text.replace(highlighterStyles + highlighterStyles + selectedText + '</a></a>', highlighterStyles + selectedText + '</a>');
     }
@@ -175,13 +172,13 @@ UPLOADER
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.unhighlight = function(selection, input) {
     if (input) {
-      var wrappedText = highlighterStyles + input + '</a>';
+      var wrappedText = '<highlighter>' + input + '</highlighter>';
       while (theFile.text.indexOf(wrappedText) !== -1) {
         theFile.text = theFile.text.replace(wrappedText, input);
       }
       $('#book-appears-here').html(theFile.text);
     } else if (selection) {
-      theFile.text = theFile.text.replace(highlighterStyles + selection + '</a>', selection);
+      theFile.text = theFile.text.replace('<highlighter>' + selection + '</highlighter>', selection);
       $('#book-appears-here').html(theFile.text);
     }
   };
