@@ -1,11 +1,20 @@
 <p class="mini-header">HIGHLIGHTS</p>
 
+
+<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+HIGHLIGHT BUTTON
+  Highlights text selections using highlightText function defined in service.js
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <form>
   <div>select a word and</div>
   <button id="highlight-button" ng-click="highlightText()" class="hvr-grow">highlight it</button>
 </form>
 
 
+<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+SEARCH AND HIGHLIGHT
+  Searches and highlights text input using highlightText function defined in service.js
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <form ng-submit="highlightText(searchInput)">
   <div>or</div>
   <input type="text" id="finder" ng-model="searchInput" placeholder="search/highlight all" autocomplete="off"></input>
@@ -13,13 +22,13 @@
 <!-- <span>FIND</span> -->
 
 
+<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+HIGHLIGHTS LIST
+  Shows highlights in repeating list
+  Includes 'x' button to remove highlights
+    <a> link surrounding 'x' funs spliceBmark function to remove the data from the array
+    <remove-dad> directive deletes list item from list
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <ul class="bmark-list">
   <li ng-repeat="bookmark in bookmarks"><a>{{bookmark.id}}</a><remove-dad ng-click="spliceBmark(bookmark)">x</remove-dad></li>
 </ul>
-
-
-
-
-<!-- <bmarker></bmarker> -->
-
-<!-- {{test}} -->

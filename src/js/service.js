@@ -121,8 +121,10 @@ UPLOADER
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   HIGHLIGHTER
-    Highlights selected text.
-    Finds and highlights text from input form.
+    Highlights selected text
+    Searches input and highlights all instances within the reader div text
+    Adds list item to highlights list showing search term and number of instances found in the text
+    Displays error in input box if search term is not found
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.highlightText = function(searchInput) {
     // var loadedText = document.getElementById("book-appears-here");

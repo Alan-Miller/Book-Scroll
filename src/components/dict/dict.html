@@ -2,11 +2,22 @@
 
 <p class="mini-header">DICTIONARY</p>
 
+
+<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+WORD SEARCH
+  Input for word definitions using wordnik.com API
+  ngSubmit triggers getWord function in dictController
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <form ng-submit="getWord(input)">
   <input id="defbox" type="text" ng-model="input" autocomplete="off" placeholder="wordnik.com">
   <!-- <div class="bold line-spaces">{{input}}</div> -->
 </form>
 
+
+<!--* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+WORD DEFINITIONS
+  ngRepeat for all definitions of the input word
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <p ng-repeat="def in theWord">
   <span class="em line-spaces"> {{def.partOfSpeech}} </span> {{def.text}}
 </p>
