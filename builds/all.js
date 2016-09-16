@@ -368,11 +368,8 @@ angular.module('bookApp').service('service', function ($http, $state) {
     Splices deleted files from files list.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.spliceFile = function (file) {
-    // console.log(files);
     theFile.title = file.title;
     theFile.text = file.text;
-    console.log(theFile.text);
-    console.log(theFile.title);
     files.splice(files.indexOf(file), 1);
     return files;
     // alert('corn');
@@ -396,12 +393,13 @@ angular.module('bookApp').service('service', function ($http, $state) {
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   HIGHLIGHTER
-    Highlights selected text.
-    Finds and highlights text from input form.
+    Highlights selected text
+    Searches input and highlights all instances within the reader div text
+    Adds list item to highlights list showing search term and number of instances found in the text
+    Displays error in input box if search term is not found
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.highlightText = function (searchInput) {
     // var loadedText = document.getElementById("book-appears-here");
-    console.log(searchInput);
     var selectedText = '';
     var newBmark = {};
     if (searchInput) {
@@ -468,7 +466,6 @@ angular.module('bookApp').service('service', function ($http, $state) {
       // url: 'http://www.dictionaryapi.com/api/v1/references/collegiate/xml/'+input+'?key=9bfc270a-2520-4eac-87fe-49577b7e0414',   //Merriam-Webster
       dataType: 'JSONP' // Merriam-Webster (and Wordnik(?))
     }).then(function (response) {
-      console.log(response);
       return response.data; // Wordnik, Merriam-Webster
       // return response.data.def[0].tr; // Yandex
     });
@@ -601,9 +598,6 @@ angular.module('bookApp').controller('bmarksController', function ($scope, servi
   // console.log($scope.loadLastFile());
   // $scope.loadLastFile();
 
-  // $scope.look = 'okay then';
-  // $scope.test = 'Why don\'t you work';
-
 });
 
 angular.module('bookApp').controller('chaptersController', function ($scope, service) {});
@@ -611,13 +605,15 @@ angular.module('bookApp').controller('chaptersController', function ($scope, ser
 angular.module('bookApp').controller('dictController', function ($scope, service) {
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  FOCUS ON DEFINITION INPUT
     Focuses on input box when state loads
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   document.getElementById("defbox").focus();
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    Takes user input and sends to service function, which makes Wordnik request.
-    The function is called by the form's ng-submit in the dict.html template.
+  GET DEFINITIONS
+    Takes user input and sends to service function, which makes Wordnik request
+    The function is called by the form's ng-submit in the dict.html template
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   $scope.getWord = function (input) {
     if (input === '') {

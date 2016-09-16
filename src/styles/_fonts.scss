@@ -1,4 +1,11 @@
-.em {
+$skewDeg: 20deg;
+$skewPos: skewY($skewDeg);
+$skewNeg: skewY(-$skewDeg);
+
+$red: rgb(200, 33, 23);
+$medgray: rgb(135, 135, 135);
+
+.ital {
   font-style: italic;
 }
 .bold {
@@ -18,8 +25,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   Basic dimensions for all letters B O O K S C R O L L
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-.char1, .char2, .char3, .char4, .char5, .char6, .char7, .char8, .char9, .char10, .char11 {
-  /*transform: skewX();*/
+.char {
   font-size: 4em;
   width: 65px;
 	height: 90px;
@@ -35,14 +41,14 @@
   Skew the divs
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .char1, .char3, .char7, .char9, .char11 {
-  -webkit-transform: skewY(20deg);
-     -moz-transform: skewY(20deg);
-       -o-transform: skewY(20deg);
+  -webkit-transform: $skewPos;
+     -moz-transform: $skewPos;
+       -o-transform: $skewPos;
 }
 .char2, .char4, .char6, .char8, .char10 {
-	-webkit-transform: skewY(-20deg);
-	   -moz-transform: skewY(-20deg);
-	     -o-transform: skewY(-20deg);
+	-webkit-transform: $skewNeg;
+	   -moz-transform: $skewNeg;
+	     -o-transform: $skewNeg;
   margin: -5px;
 }
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -50,8 +56,8 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .char1, .char3, .char6, .char8, .char10 {
   border-right: thick solid rgb(223, 72, 64);
-  background-color: rgb(200, 33, 23);}
-  .char1:after, .char3:after, .char6:after, .char8:after, .char10:after {
+  background-color: $red;
+  :after {
     content: '';
     height: 90px;
     width: 65px;
@@ -59,10 +65,12 @@
     border-left: thin solid rgb(139, 21, 15);
     right: -65px;
   }
+}
+
 .char2, .char4, .char7, .char9, .char11 {
   border-left: thick solid rgb(159, 24, 17);
-  background-color: rgb(136, 25, 18);}
-  .char2:after, .char4:after, .char7:after, .char9:after, .char11:after {
+  background-color: rgb(136, 25, 18);
+  :after {
     content: '';
     border-right: 2px solid rgb(133, 19, 13);
     height: 90px;
@@ -70,9 +78,10 @@
     position: absolute;
     left: -65px;
   }
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  Pages for letters B O O K
+  Pages
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .char1:before, .char2:before, .char3:before, .char4:before {
   content: '';
@@ -83,13 +92,6 @@
   height: 4px;
   z-index: 0;
 }
-.char2:before, .char4:before {
-  left: -5px;
-  width: 59px;
-}
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  Pages for letters S C R O L L
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 .char6:before, .char7:before, .char8:before, .char9:before, .char10:before, .char11:before {
   content: '';
   background-color: rgb(254, 219, 217);
@@ -100,7 +102,7 @@
   height: 4px;
   z-index: 0;
 }
-.char7:before, .char9:before, .char11:before {
+.char2:before, .char4:before, .char7:before, .char9:before, .char11:before {
   left: -5px;
   width: 59px;
 }

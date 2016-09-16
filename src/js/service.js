@@ -89,11 +89,8 @@ UPLOADER
     Splices deleted files from files list.
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.spliceFile = function(file) {
-    // console.log(files);
     theFile.title = file.title;
     theFile.text = file.text;
-    console.log(theFile.text);
-    console.log(theFile.title);
     files.splice(files.indexOf(file), 1);
     return files;
     // alert('corn');
@@ -128,7 +125,6 @@ UPLOADER
   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   this.highlightText = function(searchInput) {
     // var loadedText = document.getElementById("book-appears-here");
-    console.log(searchInput);
     var selectedText = '';
     var newBmark = {};
     if (searchInput) {
@@ -198,7 +194,6 @@ UPLOADER
         // url: 'http://www.dictionaryapi.com/api/v1/references/collegiate/xml/'+input+'?key=9bfc270a-2520-4eac-87fe-49577b7e0414',   //Merriam-Webster
         dataType: 'JSONP' // Merriam-Webster (and Wordnik(?))
       }).then(function(response) {
-        console.log(response);
         return response.data; // Wordnik, Merriam-Webster
         // return response.data.def[0].tr; // Yandex
       });
